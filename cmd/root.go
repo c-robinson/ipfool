@@ -9,14 +9,12 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "iptool",
-	Short: "IP Tool is a utility for moneying with ip addresses",
+	Use:   "ipfool",
+	Short: "IP Fool is a utility for moneying with ip addresses",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		_ = cmd.Usage()
 	},
-	//PersistentPreRun:  globalPersistentPreRun,
-	//PersistentPostRun: globalPersistentPostRun,
 }
 
 // Execute runs rootCmd and needs normal printer in case onIntialize fails
