@@ -19,7 +19,7 @@ var ipToIntCmd = &cobra.Command{
 			return errors.New("requires a single IP address as argument")
 		}
 		if ip := net.ParseIP(args[0]); ip == nil {
-			errors.New("address is not a valid IP address")
+			return errors.New("address is not a valid IP address")
 		}
 		return nil
 	},

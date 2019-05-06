@@ -6,7 +6,7 @@ import (
 
 var convertRootCmd = &cobra.Command{
 	Use:   "convert",
-	Short: "commands converting IP addresses between formats",
+	Short: "commands for converting IP addresses between formats",
 	Long: `
 The 'convert' subtree holds commands that convert between representations of
 IP addresses: dotted decimal, hex and integer.

@@ -19,7 +19,7 @@ var ip4ToHexCmd = &cobra.Command{
 			return errors.New("requires a single IPv4 address as argument")
 		}
 		if ip := net.ParseIP(args[0]); ip == nil {
-			errors.New("address is not a valid IPv4 address")
+			return errors.New("address is not a valid IPv4 address")
 		}
 		return nil
 	},
