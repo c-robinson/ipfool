@@ -24,8 +24,8 @@ var intToIP6Cmd = &cobra.Command{
 			return fmt.Errorf("argument could not be converted to integer")
 		}
 		d := MaxIPv6.Cmp(z)
-		if d == 1 {
-			return fmt.Errorf("%s is greater than the IPv6 address space (%d)", args[0], MaxIPv6s)
+		if d == -1 {
+			return fmt.Errorf("%s is greater than the IPv6 address space (%s)", args[0], MaxIPv6s)
 		}
 		return nil
 	},
