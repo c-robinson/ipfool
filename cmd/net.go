@@ -36,7 +36,7 @@ var netCmd = &cobra.Command{
 func ViewIPv4Address(ipnet *iplib.Net) {
 	data := map[string]string{
 		"Address": ipnet.IP.String(),
-		"Netmask": ipnet.Mask.String(),
+		"Netmask": iplib.HexStringToIP(ipnet.Mask.String()).String(),
 		"Network": ipnet.NetworkAddress().String(),
 		"First": ipnet.FirstAddress().String(),
 		"Last": ipnet.LastAddress().String(),
