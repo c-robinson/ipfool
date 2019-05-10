@@ -12,7 +12,7 @@ import (
 
 var ip4ToHexCmd = &cobra.Command{
 	Use:   "ip4tohex",
-	Short: "convert dotted-decimal address to hexadecimal",
+	Short: "dotted-decimal address to hexadecimal",
 	Long:  "",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {

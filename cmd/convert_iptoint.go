@@ -12,7 +12,7 @@ import (
 
 var ipToIntCmd = &cobra.Command{
 	Use:   "iptoint",
-	Short: "convert IPv4 or IPv6 address to integer",
+	Short: "IPv4 or IPv6 address to integer",
 	Long:  "",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {

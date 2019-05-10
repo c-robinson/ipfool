@@ -10,7 +10,7 @@ import (
 
 var netCmd = &cobra.Command{
 	Use:   "net",
-	Short: "view and manipulate ipv4 and ipv6 addresses",
+	Short: "view and manipulate ipv4 and ipv6 netblocks",
 	Long:  "",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 1 {
