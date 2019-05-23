@@ -25,7 +25,7 @@ var ipToBinaryCmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		ip := net.ParseIP(args[0])
-		fmt.Println(iplib.IPToBinaryString(ip, true))
+		fmt.Println(iplib.IPToBinaryString(ip))
 	},
 }
 
