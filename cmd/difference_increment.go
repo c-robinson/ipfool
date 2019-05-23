@@ -13,7 +13,7 @@ import (
 	"github.com/c-robinson/iplib"
 )
 
-var incBy string
+var incBy string // string so it can be sent to big.Int.SetString()
 
 var incrementCmd = &cobra.Command{
 	Use:   "increment",
