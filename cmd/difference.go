@@ -11,6 +11,7 @@ var differenceRootCmd = &cobra.Command{
 The 'difference' subtree holds commands that calculate the difference between
 IP addresses: delta, decrement and increment.
 	`,
+	DisableFlagsInUseLine: true,
 }
 
 func init() {

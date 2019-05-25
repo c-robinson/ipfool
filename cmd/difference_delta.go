@@ -1,11 +1,9 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
-	"net"
-
 	"github.com/spf13/cobra"
+	"os"
 
 	"github.com/c-robinson/iplib"
 )
@@ -14,25 +12,17 @@ var deltaCmd = &cobra.Command{
 	Use:   "delta",
 	Short: "find the distance between two IP addresses",
 	Long:  "",
-	Args: func(cmd *cobra.Command, args []string) error {
-		var ipa, ipb net.IP
-		if len(args) != 2 {
-			return errors.New("requires 2 IP addresses as arguments")
-		}
-		if ipa = net.ParseIP(args[0]); ipa == nil {
-			return errors.New("first argument is not a valid IP address")
-		}
-		if ipb = net.ParseIP(args[1]); ipb == nil {
-            return errors.New("second argument is not a valid IP address")
-        }
-		if iplib.EffectiveVersion(ipa) != iplib.EffectiveVersion(ipb) {
-			return errors.New("mismatched IP versions")
-		}
-		return nil
-	},
+	DisableFlagsInUseLine: true,
+	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		ipa := net.ParseIP(args[0])
-		ipb := net.ParseIP(args[1])
+		ipa := retrieveIPAddress(args[0], v46)
+		ipb := retrieveIPAddress(args[0], v46)
+
+		if iplib.EffectiveVersion(ipa) != iplib.EffectiveVersion(ipb) {
+			fmt.Println("supplied IP's have mismatched versions")
+			os.Exit(1)
+		}
+
 		if iplib.EffectiveVersion(ipa) == 4 {
 			fmt.Println(iplib.DeltaIP4(ipa, ipb))
 		} else {

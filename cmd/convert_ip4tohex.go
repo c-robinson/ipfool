@@ -1,30 +1,20 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
-	"net"
-
-	"github.com/spf13/cobra"
-
 	"github.com/c-robinson/iplib"
+	"github.com/spf13/cobra"
 )
 
 var ip4ToHexCmd = &cobra.Command{
 	Use:   "ip4tohex",
-	Short: "dotted-decimal address to hexadecimal",
+	Short: "dotted-decimal IPv4 address to hexadecimal",
 	Long:  "",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			return errors.New("requires a single IPv4 address as argument")
-		}
-		if ip := net.ParseIP(args[0]); ip == nil {
-			return errors.New("address is not a valid IPv4 address")
-		}
-		return nil
-	},
+	DisableFlagsInUseLine: true,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		ip := net.ParseIP(args[0])
+		ip := retrieveIPAddress(args[0], v4)
+
 		fmt.Println(iplib.IPToHexString(ip))
 	},
 }

@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/spf13/cobra"
@@ -13,21 +14,14 @@ var intToIP4Cmd = &cobra.Command{
 	Use:   "inttoip4",
 	Short: "integer to IPv4 address",
 	Long:  "",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			return fmt.Errorf("requires an integer value between 0 and %d", iplib.MaxIPv4)
-		}
+	DisableFlagsInUseLine: true,
+	Args: cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
 		i, err := strconv.Atoi(args[0])
 		if err != nil {
-			return fmt.Errorf("argument could not be converted to integer: %s", err.Error())
+			fmt.Println("supplied value is outside the valid IPv4 address range")
+			os.Exit(1)
 		}
-		if i > iplib.MaxIPv4 {
-			return fmt.Errorf("%d is greater than the IPv4 address space (%d)", i, iplib.MaxIPv4)
-		}
-		return nil
-	},
-	Run: func(cmd *cobra.Command, args []string) {
-		i, _ := strconv.Atoi(args[0])
 		fmt.Println(iplib.Uint32ToIP4(uint32(i)))
 	},
 }

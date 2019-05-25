@@ -1,10 +1,8 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"math/big"
-	"net"
 	"os"
 	"strconv"
 
@@ -19,17 +17,11 @@ var incrementCmd = &cobra.Command{
 	Use:   "increment",
 	Short: "increment an IP address by <n>",
 	Long:  "",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1  {
-			return errors.New("requires an ip address")
-		}
-		if ip := net.ParseIP(args[0]); ip == nil {
-			return errors.New("argument is not a valid IP address")
-		}
-		return nil
-	},
+	DisableFlagsInUseLine: true,
+	Args: cobra.ExactArgs(1),
+	ValidArgs: []string{ "by" },
 	Run: func(cmd *cobra.Command, args []string) {
-		ip := net.ParseIP(args[0])
+		ip := retrieveIPAddress(args[0], v46)
 
 		i, err := strconv.Atoi(incBy)
 		if err == nil {

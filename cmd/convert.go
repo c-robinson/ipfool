@@ -11,6 +11,7 @@ var convertRootCmd = &cobra.Command{
 The 'convert' subtree holds commands that convert between representations of
 IP addresses: dotted decimal, hex and integer.
 	`,
+	DisableFlagsInUseLine: true,
 }
 
 func init() {

@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
 
@@ -12,12 +11,8 @@ var hexToIPCmd = &cobra.Command{
 	Use:   "hextoip",
 	Short: "hexadecimal to IP address",
 	Long:  "",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 1 {
-			return errors.New("requires a single IP address as argument")
-		}
-		return nil
-	},
+	DisableFlagsInUseLine: true,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(iplib.HexStringToIP(args[0]))
 	},
