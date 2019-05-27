@@ -49,15 +49,14 @@ func ViewIPv4Address(ipnet iplib.Net) {
 		fmt.Println("Registered in:", strings.Join(rfclist, ", "))
 		fmt.Println(checkReservationBools(ipnet))
 	}
-
 }
 
 func ViewIPv6Address(ipnet iplib.Net) {
 	data := map[string]string{
 		"Address": ipnet.IP.String(),
-		"Netmask": ipnet.Mask.String(),
-		"First": ipnet.FirstAddress().String(),
-		"Last": ipnet.LastAddress().String(),
+		"Netmask": putSeperatorsAroundIPv6Netmask(ipnet.Mask.String()),
+		"First": iplib.ExpandIP6(ipnet.FirstAddress()),
+		"Last": iplib.ExpandIP6(ipnet.LastAddress()),
 		"Count": fmt.Sprintf("%d", ipnet.Count6()),
 	}
 
@@ -91,6 +90,17 @@ func checkReservationBools(ipnet iplib.Net) string {
 		s = s + "is not reserved\n"
 	}
 	return s
+}
+
+func putSeperatorsAroundIPv6Netmask(s string) string {
+	var ns string
+	for i, b := range s {
+		if i%4 == 0 &&   i != 0 {
+			ns += ":"
+		}
+		ns = ns + string(b)
+	}
+	return ns
 }
 
 func init() {
