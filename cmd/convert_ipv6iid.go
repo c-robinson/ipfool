@@ -9,7 +9,7 @@ import (
 
 	"github.com/c-robinson/iplib"
 	"github.com/c-robinson/iplib/iid"
-	)
+)
 
 var (
 	secret   string
@@ -18,8 +18,8 @@ var (
 )
 
 var ipv6iidCmd = &cobra.Command{
-	Use:                   "iid",
-	Short:                 "Generate IPv6 EUI64 Interface Identifier",
+	Use:   "iid",
+	Short: "Generate IPv6 EUI64 Interface Identifier",
 	Long: `
 The 'iid' subcommand expects two arguments: an IPv6 address and a hardware
 address (typically the target interface's MAC address). Given no other inputs
