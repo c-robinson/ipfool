@@ -10,12 +10,12 @@ import (
 )
 
 var netViewCmd = &cobra.Command{
-	Use:   "view",
-	Short: "view details about an ipv4 or ipv6 netblock",
-	Long:  "",
+	Use:                   "view",
+	Short:                 "view details about an ipv4 or ipv6 netblock",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
-	ValidArgs: []string{ "cidr" },
+	Args:                  cobra.ExactArgs(1),
+	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ipnet := retrieveIPNetwork(args[0], v46)
 		ViewIPAddress(ipnet)
@@ -23,7 +23,7 @@ var netViewCmd = &cobra.Command{
 }
 
 func ViewIPAddress(ipnet iplib.Net) {
-	if ipnet.Version() == 4  {
+	if ipnet.Version() == 4 {
 		ViewIPv4Address(ipnet)
 	} else {
 		ViewIPv6Address(ipnet)
@@ -32,13 +32,13 @@ func ViewIPAddress(ipnet iplib.Net) {
 
 func ViewIPv4Address(ipnet iplib.Net) {
 	data := map[string]string{
-		"Address": ipnet.IP.String(),
-		"Netmask": iplib.HexStringToIP(ipnet.Mask.String()).String(),
-		"Network": ipnet.NetworkAddress().String(),
-		"First": ipnet.FirstAddress().String(),
-		"Last": ipnet.LastAddress().String(),
+		"Address":   ipnet.IP.String(),
+		"Netmask":   iplib.HexStringToIP(ipnet.Mask.String()).String(),
+		"Network":   ipnet.NetworkAddress().String(),
+		"First":     ipnet.FirstAddress().String(),
+		"Last":      ipnet.LastAddress().String(),
 		"Broadcast": ipnet.BroadcastAddress().String(),
-		"Count": fmt.Sprintf("%d", ipnet.Count6()),
+		"Count":     fmt.Sprintf("%d", ipnet.Count6()),
 	}
 
 	for _, k := range []string{"Address", "Netmask", "Network", "First", "Last", "Broadcast", "Count"} {
@@ -55,9 +55,9 @@ func ViewIPv6Address(ipnet iplib.Net) {
 	data := map[string]string{
 		"Address": ipnet.IP.String(),
 		"Netmask": putSeperatorsAroundIPv6Netmask(ipnet.Mask.String()),
-		"First": iplib.ExpandIP6(ipnet.FirstAddress()),
-		"Last": iplib.ExpandIP6(ipnet.LastAddress()),
-		"Count": fmt.Sprintf("%d", ipnet.Count6()),
+		"First":   iplib.ExpandIP6(ipnet.FirstAddress()),
+		"Last":    iplib.ExpandIP6(ipnet.LastAddress()),
+		"Count":   fmt.Sprintf("%d", ipnet.Count6()),
 	}
 
 	for _, k := range []string{"Address", "Netmask", "First", "Last", "Count"} {
@@ -95,7 +95,7 @@ func checkReservationBools(ipnet iplib.Net) string {
 func putSeperatorsAroundIPv6Netmask(s string) string {
 	var ns string
 	for i, b := range s {
-		if i%4 == 0 &&   i != 0 {
+		if i%4 == 0 && i != 0 {
 			ns += ":"
 		}
 		ns = ns + string(b)

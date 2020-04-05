@@ -9,11 +9,11 @@ import (
 )
 
 var intToIP6Cmd = &cobra.Command{
-	Use:   "inttoip6",
-	Short: "integer to IPv6 address",
-	Long:  "",
+	Use:                   "inttoip6",
+	Short:                 "integer to IPv6 address",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
+	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var MaxIPv6s = "340282366920938463463374607431768211455"
 		MaxIPv6 := new(big.Int)

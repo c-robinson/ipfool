@@ -9,12 +9,12 @@ import (
 var superCIDR int
 
 var netSupernetCmd = &cobra.Command{
-	Use:   "supernet",
-	Short: "get the supernet of a given netblock",
-	Long:  "",
+	Use:                   "supernet",
+	Short:                 "get the supernet of a given netblock",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
-	ValidArgs: []string{ "cidr" },
+	Args:                  cobra.ExactArgs(1),
+	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ipnet := retrieveIPNetwork(args[0], v46)
 		cidr, _ := ipnet.Mask.Size()

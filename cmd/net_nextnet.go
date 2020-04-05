@@ -9,12 +9,12 @@ import (
 var nnCIDR int
 
 var netNextCmd = &cobra.Command{
-	Use:   "nextnet",
-	Short: "get the next netblock at the given mask (0 for same mask length)",
-	Long:  "",
+	Use:                   "nextnet",
+	Short:                 "get the next netblock at the given mask (0 for same mask length)",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
-	ValidArgs: []string{ "cidr" },
+	Args:                  cobra.ExactArgs(1),
+	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		_, ipnet, _ := iplib.ParseCIDR(args[0])
 		cidr, _ := ipnet.Mask.Size()

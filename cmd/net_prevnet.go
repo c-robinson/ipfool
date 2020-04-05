@@ -8,12 +8,12 @@ import (
 var pnCIDR int
 
 var netPrevCmd = &cobra.Command{
-	Use:   "prevnet",
-	Short: "get the previous netblock at the given mask (0 for same mask length)",
-	Long:  "",
+	Use:                   "prevnet",
+	Short:                 "get the previous netblock at the given mask (0 for same mask length)",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
-	ValidArgs: []string{ "cidr" },
+	Args:                  cobra.ExactArgs(1),
+	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ipnet := retrieveIPNetwork(args[0], v46)
 		cidr, _ := ipnet.Mask.Size()

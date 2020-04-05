@@ -8,11 +8,11 @@ import (
 )
 
 var ipToARPACmd = &cobra.Command{
-	Use:   "iptoarpa",
-	Short: "IPv4 or IPv6 address to DNS ARPA-domain PTR",
-	Long:  "",
+	Use:                   "iptoarpa",
+	Short:                 "IPv4 or IPv6 address to DNS ARPA-domain PTR",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
+	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		ip := retrieveIPAddress(args[0], v46)
 

@@ -6,7 +6,7 @@ import (
 
 var netRootCmd = &cobra.Command{
 	Use:   "net",
-	Short:  "commands for viewing and manipulating IP netblocks",
+	Short: "commands for viewing and manipulating IP netblocks",
 	Long: `
 The 'net subtree holds commands for viewing IP netblocks as well as
 experimenting with subnets and supernets.`,

@@ -6,11 +6,11 @@ import (
 )
 
 var netEnumerateCmd = &cobra.Command{
-	Use:   "enumerate",
-	Short: "print all IPs in the subnet (caveat emptor)",
-	Long:  "",
+	Use:                   "enumerate",
+	Short:                 "print all IPs in the subnet (caveat emptor)",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
+	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
 		ipnet := retrieveIPNetwork(args[0], v46)

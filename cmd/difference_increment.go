@@ -15,11 +15,12 @@ var incBy string // string so it can be sent to big.Int.SetString()
 
 var incrementCmd = &cobra.Command{
 	Use:   "increment",
-	Short: "increment an IP address by <n>",
-	Long:  "",
+	Short: "increment an IP address by a given amount (default 1)",
+	Long: `increment takes an IP address as input. If no arguments are given it will
+increment the address by one. the --by argument is used to specify a number.`,
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
-	ValidArgs: []string{ "by" },
+	Args:                  cobra.ExactArgs(1),
+	ValidArgs:             []string{"by"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ip := retrieveIPAddress(args[0], v46)
 

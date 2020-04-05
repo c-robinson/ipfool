@@ -11,11 +11,11 @@ import (
 )
 
 var intToIP4Cmd = &cobra.Command{
-	Use:   "inttoip4",
-	Short: "integer to IPv4 address",
-	Long:  "",
+	Use:                   "inttoip4",
+	Short:                 "integer to IPv4 address",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
+	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		i, err := strconv.Atoi(args[0])
 		if err != nil {

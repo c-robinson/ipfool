@@ -9,12 +9,12 @@ import (
 var subCIDR int
 
 var netSubnetCmd = &cobra.Command{
-	Use:   "subnet",
-	Short: "divide a netblock into subnets",
-	Long:  "",
+	Use:                   "subnet",
+	Short:                 "divide a netblock into subnets",
+	Long:                  "",
 	DisableFlagsInUseLine: true,
-	Args: cobra.ExactArgs(1),
-	ValidArgs: []string{ "cidr" },
+	Args:                  cobra.ExactArgs(1),
+	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ipnet := retrieveIPNetwork(args[0], v46)
 		cidr, _ := ipnet.Mask.Size()
