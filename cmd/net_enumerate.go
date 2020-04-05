@@ -6,9 +6,12 @@ import (
 )
 
 var netEnumerateCmd = &cobra.Command{
-	Use:                   "enumerate",
-	Short:                 "print all IPs in the subnet (caveat emptor)",
-	Long:                  "",
+	Use:   "enumerate",
+	Short: "print all IPs in the subnet (caveat emptor)",
+	Long: `
+The enumerate subcommand explicitly prints out all of the addresses in a
+given subnet, one per line. This may take an astonishingly long time in the
+IPv6 case.`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

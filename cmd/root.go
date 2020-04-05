@@ -11,7 +11,8 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "ipfool",
 	Short: "IP Fool is a utility for monkeying with IP addresses and subnets",
-	Long: `IP Fool is a feature-rich utility for viewing and manipulating IPv4 and IPv6
+	Long: `
+IP Fool is a feature-rich utility for viewing and manipulating IPv4 and IPv6
 addresses and subnets. It uses a "git style" syntax, grouping functions under
 sub-commands to hopefully make the tool more coherent and easier to navigate.
 

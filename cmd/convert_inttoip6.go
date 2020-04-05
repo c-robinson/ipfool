@@ -9,9 +9,12 @@ import (
 )
 
 var intToIP6Cmd = &cobra.Command{
-	Use:                   "inttoip6",
-	Short:                 "integer to IPv6 address",
-	Long:                  "",
+	Use:   "inttoip6",
+	Short: "integer to IPv6 address",
+	Long: `
+The inttoip6 subcommand converts an integer to an IPv6 address, where 0 is ::
+(the all zeroes address) and 340282366920938463463374607431768211455 is
+ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

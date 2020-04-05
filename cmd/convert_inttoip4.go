@@ -11,9 +11,11 @@ import (
 )
 
 var intToIP4Cmd = &cobra.Command{
-	Use:                   "inttoip4",
-	Short:                 "integer to IPv4 address",
-	Long:                  "",
+	Use:   "inttoip4",
+	Short: "integer to IPv4 address",
+	Long: `
+The inttoip4 subcommand converts an integer into an IPv4 address, where 0 is
+converted to 0.0.0.0 and 4294967295 becomes 255.255.255.255`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

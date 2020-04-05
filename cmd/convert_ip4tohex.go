@@ -7,9 +7,11 @@ import (
 )
 
 var ip4ToHexCmd = &cobra.Command{
-	Use:                   "ip4tohex",
-	Short:                 "dotted-decimal IPv4 address to hexadecimal",
-	Long:                  "",
+	Use:   "ip4tohex",
+	Short: "dotted-decimal IPv4 address to hexadecimal",
+	Long: `
+The ip4tohex command prints he hexadecimal representation of a given IPv4
+address.`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

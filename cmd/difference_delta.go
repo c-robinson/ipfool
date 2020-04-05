@@ -9,9 +9,12 @@ import (
 )
 
 var deltaCmd = &cobra.Command{
-	Use:                   "delta",
-	Short:                 "find the distance between two IP addresses",
-	Long:                  "",
+	Use:   "delta",
+	Short: "find the distance between two IP addresses",
+	Long: `
+The difference subcommand takes two IP addresses as input and returns an
+integer of the delta between them. For example the delta between 192.168.0.0
+and 192.168.0.255 is 255`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {

@@ -9,9 +9,14 @@ import (
 var superCIDR int
 
 var netSupernetCmd = &cobra.Command{
-	Use:                   "supernet",
-	Short:                 "get the supernet of a given netblock",
-	Long:                  "",
+	Use:   "supernet",
+	Short: "get the supernet of a given netblock",
+	Long: `
+The supernet subcommand takes a subnet as input and, by default, returns that
+subnet's immediate parent (the subnet with a slightly greater netmask). The
+--cidr flag can be used to request the supernet at a given mask, though it is
+an error for the input mask to be smaller than the original (for which see
+the subnet subcommand).`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	ValidArgs:             []string{"cidr"},

@@ -10,9 +10,14 @@ import (
 )
 
 var netViewCmd = &cobra.Command{
-	Use:                   "view",
-	Short:                 "view details about an ipv4 or ipv6 netblock",
-	Long:                  "",
+	Use:   "view",
+	Short: "view details about an ipv4 or ipv6 netblock",
+	Long: `
+The view subcommand takes a subnet as input and prints some handy-dandy info
+about it, like the network's first and alst usable address, the number of
+addresses it contains, whether all or part of the network overlap with an
+IANA reservation (such as the RFC 1918 private IPv4 networks or the RFC 3849
+IPv6 address space set aside for use in documentation.`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	ValidArgs:             []string{"cidr"},

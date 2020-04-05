@@ -21,7 +21,7 @@ var ipv6iidCmd = &cobra.Command{
 	Use:   "iid",
 	Short: "Generate IPv6 EUI64 Interface Identifier",
 	Long: `
-The 'iid' subcommand expects two arguments: an IPv6 address and a hardware
+The iid subcommand expects two arguments: an IPv6 address and a hardware
 address (typically the target interface's MAC address). Given no other inputs
 it will generate an EUI64-style IPv6 IID scoped for local-subnet use ONLY,
 this is because and IID generated in this way leaks personal information about

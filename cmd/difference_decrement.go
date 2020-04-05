@@ -16,7 +16,8 @@ var decBy string
 var decrementCmd = &cobra.Command{
 	Use:   "decrement",
 	Short: "decrement an IP address by a given amount (default 1)",
-	Long: `decrement takes an IP address as input. If no arguments are given it will
+	Long: `
+Decrement takes an IP address as input. If no arguments are given it will
 decrement the address by one. the --by argument is used to specify a number.`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),

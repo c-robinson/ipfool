@@ -9,9 +9,13 @@ import (
 var subCIDR int
 
 var netSubnetCmd = &cobra.Command{
-	Use:                   "subnet",
-	Short:                 "divide a netblock into subnets",
-	Long:                  "",
+	Use:   "subnet",
+	Short: "divide a netblock into subnets",
+	Long: `
+The subnet subcommand takes a subnet as input and, by default, splits the
+subnet in half. The --cidr command can be supplied to divide it dfferently.
+It is an error to supply a mask larger than the input mask (for which see the
+supernet subcommand).`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	ValidArgs:             []string{"cidr"},
