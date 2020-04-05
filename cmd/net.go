@@ -10,7 +10,6 @@ var netRootCmd = &cobra.Command{
 	Long: `
 The 'net subtree holds commands for viewing IP netblocks as well as
 experimenting with subnets and supernets.`,
-	DisableFlagsInUseLine: true,
 }
 
 func init() {
