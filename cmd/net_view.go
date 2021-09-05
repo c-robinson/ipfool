@@ -42,11 +42,12 @@ func ViewIPv4Address(ipnet iplib.Net) {
 		"Network":   ipnet.NetworkAddress().String(),
 		"First":     ipnet.FirstAddress().String(),
 		"Last":      ipnet.LastAddress().String(),
+		"Wildcard":  ipnet.Wildcard().String(),
 		"Broadcast": ipnet.BroadcastAddress().String(),
 		"Count":     fmt.Sprintf("%d", ipnet.Count6()),
 	}
 
-	for _, k := range []string{"Address", "Netmask", "Network", "First", "Last", "Broadcast", "Count"} {
+	for _, k := range []string{"Address", "Netmask", "Network", "First", "Last", "Wildcard", "Broadcast", "Count"} {
 		fmt.Printf("%-18s %-16s\n", k, data[k])
 	}
 	rfclist := iana.GetRFCsForNetwork(ipnet)
