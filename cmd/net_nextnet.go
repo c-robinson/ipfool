@@ -20,18 +20,26 @@ the next net at a different mask.`,
 	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		_, ipnet, _ := iplib.ParseCIDR(args[0])
-		cidr, _ := ipnet.Mask.Size()
+		cidr, _ := ipnet.Mask().Size()
 		if nnCIDR == 0 {
 			nnCIDR = cidr
 		}
 
 		fmt.Printf("%-18s %-36s\n", "Original", ipnet.String())
 		ViewIPAddress(ipnet)
-		ipnets := ipnet.NextNet(nnCIDR)
-		fmt.Printf("%-18s %-36s\n", "Next adjacent", ipnets.String())
 
-		ViewIPAddress(ipnets)
+		switch ipnet.Version() {
+		case iplib.IP4Version:
+			ipnets := ipnet.(iplib.Net4).NextNet(pnCIDR)
+			fmt.Printf("%-18s %-36s\n", "Next adjacent", ipnets.String())
+			ViewIPAddress(ipnets)
 
+		case iplib.IP6Version:
+			ipnets := ipnet.(iplib.Net6).NextNet(pnCIDR)
+			fmt.Printf("%-18s %-36s\n", "Next adjacent", ipnets.String())
+			ViewIPAddress(ipnets)
+
+		}
 	},
 }
 

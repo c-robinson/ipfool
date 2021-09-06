@@ -28,23 +28,25 @@ IPv6 address space set aside for use in documentation.`,
 }
 
 func ViewIPAddress(ipnet iplib.Net) {
-	if ipnet.Version() == 4 {
-		ViewIPv4Address(ipnet)
-	} else {
-		ViewIPv6Address(ipnet)
+	switch ipnet.Version() {
+	case iplib.IP4Version:
+		ViewIPv4Address(ipnet.(iplib.Net4))
+
+	case iplib.IP6Version:
+		ViewIPv6Address(ipnet.(iplib.Net6))
 	}
 }
 
-func ViewIPv4Address(ipnet iplib.Net) {
+func ViewIPv4Address(ipnet iplib.Net4) {
 	data := map[string]string{
-		"Address":   ipnet.IP.String(),
-		"Netmask":   iplib.HexStringToIP(ipnet.Mask.String()).String(),
+		"Address":   ipnet.IP().String(),
+		"Netmask":   iplib.HexStringToIP(ipnet.Mask().String()).String(),
 		"Network":   ipnet.NetworkAddress().String(),
 		"First":     ipnet.FirstAddress().String(),
 		"Last":      ipnet.LastAddress().String(),
 		"Wildcard":  ipnet.Wildcard().String(),
 		"Broadcast": ipnet.BroadcastAddress().String(),
-		"Count":     fmt.Sprintf("%d", ipnet.Count6()),
+		"Count":     fmt.Sprintf("%d", ipnet.Count()),
 	}
 
 	for _, k := range []string{"Address", "Netmask", "Network", "First", "Last", "Wildcard", "Broadcast", "Count"} {
@@ -57,13 +59,13 @@ func ViewIPv4Address(ipnet iplib.Net) {
 	}
 }
 
-func ViewIPv6Address(ipnet iplib.Net) {
+func ViewIPv6Address(ipnet iplib.Net6) {
 	data := map[string]string{
-		"Address": ipnet.IP.String(),
-		"Netmask": putSeperatorsAroundIPv6Netmask(ipnet.Mask.String()),
+		"Address": ipnet.IP().String(),
+		"Netmask": putSeperatorsAroundIPv6Netmask(ipnet.Mask().String()),
 		"First":   iplib.ExpandIP6(ipnet.FirstAddress()),
 		"Last":    iplib.ExpandIP6(ipnet.LastAddress()),
-		"Count":   fmt.Sprintf("%d", ipnet.Count6()),
+		"Count":   fmt.Sprintf("%d", ipnet.Count()),
 	}
 
 	for _, k := range []string{"Address", "Netmask", "First", "Last", "Count"} {

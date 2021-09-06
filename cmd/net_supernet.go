@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/c-robinson/iplib"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -22,7 +23,7 @@ the subnet subcommand).`,
 	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ipnet := retrieveIPNetwork(args[0], v46)
-		cidr, _ := ipnet.Mask.Size()
+		cidr, _ := ipnet.Mask().Size()
 		if superCIDR == 0 {
 			superCIDR = cidr - 1
 		}
@@ -33,11 +34,20 @@ the subnet subcommand).`,
 
 		fmt.Printf("%-18s %-36s\n", "Original", ipnet.String())
 		ViewIPAddress(ipnet)
-		ipnets, _ := ipnet.Supernet(superCIDR)
-		fmt.Printf("%-18s %-36s\n", "Supernet", ipnets.String())
 
-		ViewIPAddress(ipnets)
+		switch ipnet.Version() {
+		case iplib.IP4Version:
+			ipnets, _ := ipnet.(iplib.Net4).Supernet(superCIDR)
+			fmt.Printf("%-18s %-36s\n", "Supernet", ipnets.String())
+			ViewIPAddress(ipnets)
 
+		case iplib.IP6Version:
+			ipnets, _ := ipnet.(iplib.Net6).Supernet(superCIDR, 0)
+			fmt.Printf("%-18s %-36s\n", "Supernet", ipnets.String())
+			ViewIPAddress(ipnets)
+
+
+		}
 	},
 }
 
