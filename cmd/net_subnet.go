@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/c-robinson/iplib"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/c-robinson/iplib/v2"
+	"github.com/spf13/cobra"
 )
 
 var subCIDR int
@@ -13,8 +14,8 @@ var netSubnetCmd = &cobra.Command{
 	Use:   "subnet",
 	Short: "divide a netblock into subnets",
 	Long: `
-The subnet subcommand takes a subnet as input and, by default, splits the
-subnet in half. The --cidr command can be supplied to divide it differently.
+The 'net subnet' subcommand takes a subnet as input and, by default, splits
+the subnet in half. The --cidr flag can be supplied to divide it differently.
 It is an error to supply a mask larger than the input mask (for which see the
 supernet subcommand).`,
 	DisableFlagsInUseLine: true,

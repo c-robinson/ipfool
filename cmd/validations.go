@@ -5,7 +5,7 @@ import (
 	"net"
 	"os"
 
-	"github.com/c-robinson/iplib"
+	"github.com/c-robinson/iplib/v2"
 )
 
 type addrType int
@@ -26,7 +26,7 @@ func retrieveIPAddress(s string, t addrType) net.IP {
 
 	if t != addrType(0) {
 		if int(t) != iplib.EffectiveVersion(ip) {
-			fmt.Println("supplied IP version not supported in this function")
+			fmt.Printf("supplied IP '%s' invalid version for this function\n", ip)
 			os.Exit(1)
 		}
 	}

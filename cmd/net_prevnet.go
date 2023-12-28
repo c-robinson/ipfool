@@ -2,7 +2,8 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/c-robinson/iplib"
+
+	"github.com/c-robinson/iplib/v2"
 	"github.com/spf13/cobra"
 )
 
@@ -12,11 +13,11 @@ var netPrevCmd = &cobra.Command{
 	Use:   "prevnet",
 	Short: "get the previous netblock at the given mask (0 for same mask length)",
 	Long: `
-The prevnet subcommand takes a subnet as input and, by default, returns the
-adjacent subnet preceding it, with the same mask length. The --cidr flag can
-be used to generate the subnet at a different mask length but if the supplied
-mask is larger than the original one it is very likely that the new subnet
-will wind up being the supernet of the input subnet.`,
+The 'net prevnet' subcommand takes a subnet as input and, by default, returns
+the adjacent subnet preceding it, with the same mask length. The --cidr flag
+can be used to generate the subnet at a different mask length but if the
+supplied mask is larger than the original one it is very likely that the new
+subnet will wind up being the supernet of the input subnet.`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	ValidArgs:             []string{"cidr"},

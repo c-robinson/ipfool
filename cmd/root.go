@@ -16,26 +16,30 @@ IP Fool is a feature-rich utility for viewing and manipulating IPv4 and IPv6
 addresses and subnets. It uses a "git style" syntax, grouping functions under
 sub-commands to hopefully make the tool more coherent and easier to navigate.
 
-Convert
-The "convert" subcommand contains functions for printing addresses in various
-formats, for example viewing an IP address by its binary, hexidecimal or
-integer value, or printing its ARPA reverse-DNS entry (which can save a lot
-of typing in the v6 case). The "convert iid" subcommand will generate an RFC
-7217-compliant "semantically opaque" IPv6 address.
+v4
+This subtree holds commands for converting IPv4 addresses between formats,
+incrementing or decrementing them by a given amount, or calculating the
+delta between two addresses. Conversions include in-addr.arpa, binary,
+hexadecimal and integer representations.
 
-Difference
-The "difference" subcommand contains functions for calculating the distance
-between two addresses or for incrementing/decrementing a supplied address by
-a given amount.
+v6
+This subtree holds commands for converting IPv6 addresses between formats,
+incrementing or decrementing them by a given amount, or calculating the
+delta between two addresses. Conversions include in-addr.arpa, binary and
+integer representations, as well as "expanding" the address. Also available
+is the 'iid' subcommand, which generates an RFC 7217-compliant "semantically
+opaque" IPv6 address from bits and bobs you give it.
 
-Net
-The "net" subcommand is for working with subnets. "net view" provides a
-summary of the subnet (size, first and last address, etc) as well as
-reporting on any IANA reservations which may apply to all or part of the
-it and what RFC covers them. The rest of the commands provide tools for
-enumerating that block into discrete addresses (which may take infinitely
-long for IPv6), carving the block into smaller subnets, or retrieving the
-supernet of the given block.
+net
+This subtree holds commands for working with both IPv4 and IPv6 networks.
+The 'net view' subcommand is probably the most generally interesting as it
+provides a summary of the subnet (size, first and last address, etc). Other
+commands provide tools for calculating the previous or next neighbor of a
+block, super- or sub-netting the block to a given mask length, generating
+random addresses for a block or enumerating part or all of it.
+
+Further help can be found for each subcommand via:
+	ipfool <subcommand> --help
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		_ = cmd.Usage()

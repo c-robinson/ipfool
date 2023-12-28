@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/c-robinson/iplib"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/c-robinson/iplib/v2"
+	"github.com/spf13/cobra"
 )
 
 var superCIDR int
@@ -13,10 +14,10 @@ var netSupernetCmd = &cobra.Command{
 	Use:   "supernet",
 	Short: "get the supernet of a given netblock",
 	Long: `
-The supernet subcommand takes a subnet as input and, by default, returns that
-subnet's immediate parent (the subnet with a slightly greater netmask). The
---cidr flag can be used to request the supernet at a given mask, though it is
-an error for the input mask to be smaller than the original (for which see
+The 'net supernet' subcommand takes a subnet as input and, by default, returns
+that subnet's immediate parent (the subnet with a slightly greater netmask).
+The --cidr flag can be used to request the supernet at a given mask, though it
+is an error for the input mask to be smaller than the original (for which see
 the subnet subcommand).`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
@@ -45,7 +46,6 @@ the subnet subcommand).`,
 			ipnets, _ := ipnet.(iplib.Net6).Supernet(superCIDR, 0)
 			fmt.Printf("%-18s %-36s\n", "Supernet", ipnets.String())
 			ViewIPAddress(ipnets)
-
 
 		}
 	},
