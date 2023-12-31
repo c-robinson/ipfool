@@ -1,8 +1,5 @@
-github.com/c-robinson/iplib v1.0.8 h1:exDRViDyL9UBLcfmlxxkY5odWX5092nPsQIykHXhIn4=
-github.com/c-robinson/iplib v1.0.8/go.mod h1:i3LuuFL1hRT5gFpBRnEydzw8R6yhGkF4szNDIbF8pgo=
-github.com/c-robinson/iplib/v2 v2.0.0 h1:U67OmvZ0CZvtZl+84eZo+x4qfOqO3t4uLZ1xkBC6dAI=
-github.com/c-robinson/iplib/v2 v2.0.0/go.mod h1:/UHegU2JYB3k5O3tRBIvoVJAuX48g0XaHVY6iqvklH8=
-github.com/c-robinson/iplib/v2 v2.0.1/go.mod h1:uFBmLmAF+Ok3ZINVSaey+jgVYQA39Uxjvk5yw5d+lD8=
+github.com/c-robinson/iplib/v2 v2.0.2 h1:p/l0bltnK/IxBGjtYiVkvkF4Lu7o1Alz+NDkWI9Kb7g=
+github.com/c-robinson/iplib/v2 v2.0.2/go.mod h1:ZfjJB+pR8Guy++ylL+OgGzN9dd4jWAE1CszvwVrjlJI=
 github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
