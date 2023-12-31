@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/c-robinson/iplib/iana/v2"
+	"github.com/c-robinson/iplib/v2/iana"
 	"github.com/spf13/cobra"
 
 	"github.com/c-robinson/iplib/v2"

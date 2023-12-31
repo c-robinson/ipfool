@@ -8,8 +8,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/c-robinson/iplib/iid/v2"
 	"github.com/c-robinson/iplib/v2"
+	"github.com/c-robinson/iplib/v2/iid"
 )
 
 var (
