@@ -12,7 +12,7 @@ import (
 var ncCode bool
 
 var netContainsCmd = &cobra.Command{
-	Use:   "contains",
+	Use:   "contains <network> <network|address>",
 	Short: "does the given network contain the provided network or address",
 	Long: `
 The 'net contains' subcommand takes two arguments: a network and either a
@@ -48,14 +48,4 @@ it kind of works out.`,
 func init() {
 	netRootCmd.AddCommand(netContainsCmd)
 	netContainsCmd.Flags().BoolVarP(&ncCode, "code", "x", false, "use exit code for output")
-}
-
-func respondToTrueFalseQuestion(result, exitCodeOnly bool) {
-	if !exitCodeOnly {
-		fmt.Printf("%t\n", result)
-	}
-	if result {
-		os.Exit(0)
-	}
-	os.Exit(1)
 }

@@ -16,6 +16,16 @@ var (
 	v6  addrType = 6
 )
 
+func respondToTrueFalseQuestion(result, exitCodeOnly bool) {
+	if !exitCodeOnly {
+		fmt.Printf("%t\n", result)
+	}
+	if result {
+		os.Exit(0)
+	}
+	os.Exit(1)
+}
+
 func retrieveIPAddress(s string, t addrType) net.IP {
 	ip := net.ParseIP(s)
 
