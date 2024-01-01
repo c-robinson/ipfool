@@ -12,7 +12,7 @@ includes:
  * converting between IPv4 and in-addr.arpa, binary, hexadecimal or
    integer representations
  * calculating the distance between two IPv4 addresses
- * incrementing or decrementing and IPv4 address
+ * incrementing or decrementing an IPv4 address
 
 To work with IPv4 networks, use the 'net' subtree.
 	`,
