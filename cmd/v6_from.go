@@ -6,7 +6,7 @@ import (
 
 var v6FromCmd = &cobra.Command{
 	Use:                   "from",
-	Short:                 "convert to IPv6 from ip.arpa or integer",
+	Short:                 "convert from ip6.arpa or integer to IPv6",
 	DisableFlagsInUseLine: true,
 }
 

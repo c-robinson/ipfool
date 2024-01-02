@@ -8,13 +8,16 @@ import (
 )
 
 var v6FromArpaCmd = &cobra.Command{
-	Use:   "arpa",
-	Short: "in-addr.arpa to IPv6 address",
+	Use:   "arpa <ip6.arpa PTR record>",
+	Short: "IPv6 address from DNS ARPA-domain PTR",
 	Long: `
-The 'v6 from arpa' subcommand converts an address in in-addr.arpa format
-to a regular-old IPv4 address. For example
-1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa
-becomes 2001:db8::1`,
+The 'v6 from arpa' subcommand converts an address in ip6.arpa format to a
+regular-old IPv6 address.
+
+Examples:
+  % ipfool v6 from arpa 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa
+  2001:db8::1
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

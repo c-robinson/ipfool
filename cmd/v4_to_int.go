@@ -8,11 +8,16 @@ import (
 )
 
 var v4ToIntCmd = &cobra.Command{
-	Use:   "int",
-	Short: "IPv4 address to 32bit integer",
+	Use:   "int <address>",
+	Short: "IPv4 address to 32bit unsigned integer",
 	Long: `
 The 'v4 to int' subcommand converts a given IPv4 address into an integer
-where the first address (0.0.0.0) is indexed to 0.`,
+where the first address (0.0.0.0) is indexed to 0.
+
+Examples:
+  % ipfool v4 to int 192.168.1.1
+  3232235777
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

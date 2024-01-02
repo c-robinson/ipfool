@@ -15,7 +15,7 @@ includes:
  * incrementing or decrementing an IPv4 address
 
 To work with IPv4 networks, use the 'net' subtree.
-	`,
+`,
 	DisableFlagsInUseLine: true,
 }
 

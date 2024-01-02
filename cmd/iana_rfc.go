@@ -12,7 +12,7 @@ import (
 var ianaRFCViewFlag bool
 
 var ianaRFCCmd = &cobra.Command{
-	Use:   "rfc [rfc number]",
+	Use:   "rfc <rfc number>",
 	Short: "list networks affected by a specific special registry RFC",
 	Long: `
 The 'iana rfc' subcommand returns the list of all networks affected by the

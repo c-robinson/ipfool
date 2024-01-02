@@ -10,13 +10,16 @@ import (
 )
 
 var v4FromHexCmd = &cobra.Command{
-	Use:   "hex",
-	Short: "hexadecimal to IPv4 address",
+	Use:   "hex <hexadecimal value>",
+	Short: "IPv4 address from hexadecimal",
 	Long: `
-The 'v4 from hex' subcommand converts a hexadecimal value to an IPv4 address,
-for example 0xc0a80101 becomes 192.168.1.1
+The 'v4 from hex' subcommand converts a hexadecimal value to an IPv4 address.
+The traditional '0x' prefix is optional but knock yourself out.
 
-The 0x prefix is optional but harmless, knock yourself out.`,
+Examples:
+  % ipfool v4 from hex 0xc0a80101
+  192.168.1.1
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

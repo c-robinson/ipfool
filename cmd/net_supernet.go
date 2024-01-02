@@ -30,7 +30,6 @@ Examples:
 
   % ipfool net supernet --cidr 32 2001:db8:a000::/35
   2001:db8::/32
-
 `,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),

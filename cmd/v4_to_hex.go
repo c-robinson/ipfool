@@ -8,16 +8,20 @@ import (
 )
 
 var v4ToHexCmd = &cobra.Command{
-	Use:   "hex",
+	Use:   "hex <address>",
 	Short: "dotted-decimal IPv4 address to hexadecimal",
 	Long: `
 The 'v4 to hex' command prints he hexadecimal representation of a given IPv4
-address.`,
+address.
+
+Examples:
+  % ipfool v4 to hex 192.168.1.1
+  c0a80101
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		ip := retrieveIPAddress(args[0], v4)
-
 		fmt.Println(iplib.IPToHexString(ip))
 	},
 }

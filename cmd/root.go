@@ -25,7 +25,7 @@ hexadecimal and integer representations.
 v6
 This subtree holds commands for converting IPv6 addresses between formats,
 incrementing or decrementing them by a given amount, or calculating the
-delta between two addresses. Conversions include in-addr.arpa, binary and
+delta between two addresses. Conversions include ip6.arpa, binary and
 integer representations, as well as "expanding" the address. Also available
 is the 'iid' subcommand, which generates an RFC 7217-compliant "semantically
 opaque" IPv6 address from bits and bobs you give it.
