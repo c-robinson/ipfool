@@ -6,7 +6,7 @@ import (
 
 var v4ToCmd = &cobra.Command{
 	Use:                   "to",
-	Short:                 "convert from IPv4 to in-addr.arpa, binary, hexadecimal or integer",
+	Short:                 "convert IPv4 to in-addr.arpa, binary, hexadecimal or integer",
 	DisableFlagsInUseLine: true,
 }
 
