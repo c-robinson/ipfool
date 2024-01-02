@@ -11,21 +11,56 @@ import (
 )
 
 var netViewCmd = &cobra.Command{
-	Use:   "view",
+	Use:   "view <network>",
 	Short: "view details about an ipv4 or ipv6 netblock",
 	Long: `
 The 'net view' subcommand takes a subnet as input and prints some handy-dandy
 info about it, like the network's first and last usable address, the number of
-addresses it contains, whether all or part of the network overlap with an
-IANA reservation (such as the RFC 1918 private IPv4 networks or the RFC 3849
-IPv6 address space set aside for use in documentation.
+addresses it contains and whether all or part of the network overlap with an
+IANA reservation.
 
 Note that the count that is returned is the number of *usable* addresses in
 the block, not the total number. For IPv4 this means that in all but one case
 the count will be 2 less than the total number of addresses in the block since
 the first and last addresses are reserved for network and broadcast. The lone
 exception is a /31, which has only two addresses and is only used in the wild
-for numbering point-to-point links a la RFC 3021.`,
+for numbering point-to-point links a la RFC 3021.
+
+On top of reporting data about the network, the 'view' subcommand also reports
+RFC's governing any "special use" purposes of a given netblock as well as the
+status of three boolean designations: "forwardable", "private" and "reserved".
+These are copied straight from the relevant IANA registries and their
+translations are:
+
+	Forwardable: A boolean value indicating whether a router may
+      forward an IP datagram whose destination address is drawn from the
+      allocated special-purpose address block between external
+      interfaces.
+
+    Private (aka "Globally Reachable"): A boolean value indicating
+      whether an IP datagram whose destination address is drawn from the
+      allocated special-purpose address block is forwardable beyond a
+      specified administrative domain.
+
+    Reserved(-by-Protocol): A boolean value indicating whether the
+      special-purpose address block is reserved by IP, itself.  This
+      value is "TRUE" if the RFC that created the special-purpose
+      address block requires all compliant IP implementations to behave
+      in a special way when processing packets either to or from
+      addresses contained by the address block.
+
+The kinds of RFCs reported are those that constrain a portion of the address
+space. The most well-known examples being RFC 1918 for the private IPv4 space
+and RFC 3849 for the IPv6 documentation space.
+
+As for the scope of these designations (and the RFCs that may also be listed),
+the rule is that 'view' reports "greedily" meaning that if any part of the
+address block is named in an RFC (or has a boolean value of true for any of
+the three special designations) then the entire block is reported as such. So
+'net view ::/0' will report the entire IPv6 space, every relevant RFC and the
+most restrictive designation values. If you squint it kind of makes the most
+sense that way. I think.
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	ValidArgs:             []string{"cidr"},
@@ -38,14 +73,14 @@ for numbering point-to-point links a la RFC 3021.`,
 func ViewIPAddress(ipnet iplib.Net) {
 	switch ipnet.Version() {
 	case iplib.IP4Version:
-		ViewIPv4Address(ipnet.(iplib.Net4))
+		netViewIPv4Address(ipnet.(iplib.Net4))
 
 	case iplib.IP6Version:
-		ViewIPv6Address(ipnet.(iplib.Net6))
+		netViewIPv6Address(ipnet.(iplib.Net6))
 	}
 }
 
-func ViewIPv4Address(ipnet iplib.Net4) {
+func netViewIPv4Address(ipnet iplib.Net4) {
 	data := map[string]string{
 		"Address":   ipnet.IP().String(),
 		"Netmask":   iplib.HexStringToIP(ipnet.Mask().String()).String(),
@@ -67,7 +102,7 @@ func ViewIPv4Address(ipnet iplib.Net4) {
 	}
 }
 
-func ViewIPv6Address(ipnet iplib.Net6) {
+func netViewIPv6Address(ipnet iplib.Net6) {
 	data := map[string]string{
 		"Address": ipnet.IP().String(),
 		"Netmask": putSeperatorsAroundIPv6Netmask(ipnet.Mask().String()),

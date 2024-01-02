@@ -8,11 +8,19 @@ import (
 )
 
 var netRandomIPCmd = &cobra.Command{
-	Use:   "random",
-	Short: "return a random IP from the given subnet",
+	Use:   "random <network>",
+	Short: "return a random IP from the given netblock",
 	Long: `
 The 'net random' subcommand selects a random IP address from the given v4
-or v6 subnet.`,
+or v6 subnet.
+
+Examples:
+  % ipfool net random 192.168.0.0/16
+  192.168.4.164
+
+  % ipfool net random 2001:db8::/64
+  2001:db8::8a48:1da:8b4b:d7d1
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

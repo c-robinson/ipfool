@@ -9,11 +9,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var ncCode bool
+var netContainsCodeFlag bool
 
 var netContainsCmd = &cobra.Command{
 	Use:   "contains <network> <network|address>",
-	Short: "does the given network contain the provided network or address",
+	Short: "check if a network encompasses another network or address",
 	Long: `
 The 'net contains' subcommand takes two arguments: a network and either a
 second network or an IP address. It returns true if the second argument is
@@ -23,7 +23,27 @@ If the --code flag is provided then output is returned as an exit code (0 for
 true, 1 for false). This is a little problematic since a non-zero exit code
 is overloaded for "doesn't contain" as well as input errors but technically
 the word "pickle" is not contained within the 2001:db8::/64 address space so
-it kind of works out.`,
+it kind of works out.
+
+Examples:
+  % ipfool net contains 10.0.0.0/8 192.168.255.8
+  false
+
+  % ipfool net contains 192.168.0.0/16 192.168.255.8
+  true
+
+  % ipfool net contains 2001:db8::/64 2001:db8:0:0:ffff:1:191::
+  true
+
+  % ipfool net contains 2001:db8::/64 2001:db8:0:0:1::/64
+  true
+
+  % ipfool net contains 2001:db8::/64 2001:db8:1::/64
+  false
+
+  % ipfool net contains 192.168.0.0/16 192.168.2.0/24
+  true
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -32,12 +52,13 @@ it kind of works out.`,
 		// if the compare request is against a valid network
 		_, cnet, err := iplib.ParseCIDR(args[1])
 		if err == nil {
-			respondToTrueFalseQuestion(ipnet.ContainsNet(cnet), ncCode)
+
+			respondToTrueFalseQuestion(ipnet.ContainsNet(cnet), netContainsCodeFlag)
 		}
 
 		caddr := net.ParseIP(args[1])
 		if caddr != nil {
-			respondToTrueFalseQuestion(ipnet.Contains(caddr), ncCode)
+			respondToTrueFalseQuestion(ipnet.Contains(caddr), netContainsCodeFlag)
 		}
 
 		fmt.Println("Invalid input")
@@ -47,5 +68,5 @@ it kind of works out.`,
 
 func init() {
 	netRootCmd.AddCommand(netContainsCmd)
-	netContainsCmd.Flags().BoolVarP(&ncCode, "code", "x", false, "use exit code for output")
+	netContainsCmd.Flags().BoolVarP(&netContainsCodeFlag, "code", "x", false, "use exit code for output")
 }

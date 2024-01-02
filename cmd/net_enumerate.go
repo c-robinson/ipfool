@@ -8,15 +8,27 @@ import (
 	"lukechampine.com/uint128"
 )
 
-var neOffset, neCount int
+var netEnumerateOffsetFlag, netEnumerateCountFlag int
 
 var netEnumerateCmd = &cobra.Command{
-	Use:   "enumerate",
+	Use:   "enumerate <network>",
 	Short: "print all IPs in the subnet (caveat emptor)",
 	Long: `
 The 'net enumerate' subcommand explicitly prints out all of the addresses in
 a given subnet, one per line. This may take an astonishingly long time in the
-IPv6 case.`,
+IPv6 case.
+
+The --offset flag can be used to start the enumeration at a distance from the
+start address, and the --count flag can be used to limit the number of IPs
+returned.
+
+Examples:
+  % ipfool.go net enumerate --offset 15 --count 4 192.168.0.0/16
+  192.168.0.15
+  192.168.0.16
+  192.168.0.17
+  192.168.0.18
+`,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -33,26 +45,26 @@ IPv6 case.`,
 
 func enumerateNet4(n iplib.Net4) {
 	var err error
-	if neOffset == 0 {
-		neOffset = 1
+	if netEnumerateOffsetFlag == 0 {
+		netEnumerateOffsetFlag = 1
 	}
 
-	if neCount > int(n.Count())-neOffset {
-		fmt.Println("Requested count", neCount, "larger than block count", n.Count())
+	if netEnumerateCountFlag > int(n.Count())-netEnumerateOffsetFlag {
+		fmt.Println("Requested count", netEnumerateCountFlag, "larger than block count", n.Count())
 		return
 	}
 
-	if neCount == 0 {
-		neCount = int(n.Count())
+	if netEnumerateCountFlag == 0 {
+		netEnumerateCountFlag = int(n.Count())
 	}
 
-	ip := iplib.IncrementIP4By(n.IP(), uint32(neOffset))
+	ip := iplib.IncrementIP4By(n.IP(), uint32(netEnumerateOffsetFlag))
 	count := 0
 	for {
 		count++
 		fmt.Println(ip)
 		ip, err = n.NextIP(ip)
-		if err != nil || count == neCount {
+		if err != nil || count == netEnumerateCountFlag {
 			return
 		}
 	}
@@ -60,14 +72,14 @@ func enumerateNet4(n iplib.Net4) {
 
 func enumerateNet6(n iplib.Net6) {
 	var err error
-	z := uint128.From64(uint64(neOffset))
+	z := uint128.From64(uint64(netEnumerateOffsetFlag))
 	ip := iplib.IncrementIP6By(n.IP(), z)
 	count := 0
 	for {
 		count++
 		fmt.Println(ip)
 		ip, err = n.NextIP(ip)
-		if err != nil || count == neCount {
+		if err != nil || count == netEnumerateCountFlag {
 			return
 		}
 	}
@@ -75,6 +87,6 @@ func enumerateNet6(n iplib.Net6) {
 
 func init() {
 	netRootCmd.AddCommand(netEnumerateCmd)
-	netEnumerateCmd.Flags().IntVarP(&neOffset, "offset", "o", 0, "offset into the netblock to start from")
-	netEnumerateCmd.Flags().IntVarP(&neCount, "count", "c", 0, "max number of entries to print")
+	netEnumerateCmd.Flags().IntVarP(&netEnumerateOffsetFlag, "offset", "o", 0, "offset into the netblock to start from")
+	netEnumerateCmd.Flags().IntVarP(&netEnumerateCountFlag, "count", "c", 0, "max number of entries to print")
 }

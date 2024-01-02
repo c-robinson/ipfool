@@ -8,16 +8,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var nbContinue bool
+var netBetweenContinueFlag bool
 
 var netBetweenCmd = &cobra.Command{
 	Use:   "between <address> <address>",
 	Short: "create a network between two IP addresses",
 	Long: `
 The 'net between' subcommand takes two IP addresses as arguments and returns
-the largest IP netblock that will fit between them. Note that this might not
-span the delta entirely. If the --continue flag is set then the command will
-continue to return nets until the delta is spanned.
+the largest IP netblock that will fit between them (inclusive of the first
+address and exclusive of the last). Note that this might not span the delta
+entirely. If the --continue flag is set then the command will continue to
+return nets until the delta is spanned.
 
 Examples:
   % ipfool net between 10.0.0.0 15.1.0.1
@@ -32,6 +33,7 @@ Examples:
 `,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(2),
+	ValidArgs:             []string{"continue"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ipa := retrieveIPAddress(args[0], v46)
 		ipb := retrieveIPAddress(args[1], v46)
@@ -60,7 +62,7 @@ Examples:
 			}
 			fmt.Println(ipnet)
 
-			if b == true || nbContinue == false {
+			if b == true || netBetweenContinueFlag == false {
 				os.Exit(0)
 			}
 
@@ -86,5 +88,5 @@ Examples:
 
 func init() {
 	netRootCmd.AddCommand(netBetweenCmd)
-	netBetweenCmd.Flags().BoolVarP(&nbContinue, "continue", "c", false, "keep going til no networks can be found")
+	netBetweenCmd.Flags().BoolVarP(&netBetweenContinueFlag, "continue", "c", false, "keep going til no networks can be found")
 }
