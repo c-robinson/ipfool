@@ -32,3 +32,5 @@ _testmain.go
 # external packages folder
 vendor/
 
+
+dist/
