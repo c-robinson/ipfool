@@ -24,7 +24,10 @@ var VersionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "print ipfool version",
 	Run: func(cmd *cobra.Command, args []string) {
-		info, _ := debug.ReadBuildInfo()
+		info, ok := debug.ReadBuildInfo()
+		if !ok {
+			panic("could not read build info")
+		}
 		iplibVersion := "unknown"
 		for _, mod := range info.Deps {
 			if mod.Path == "github.com/c-robinson/iplib/v2" {
@@ -32,7 +35,7 @@ var VersionCmd = &cobra.Command{
 			}
 		}
 
-		fmt.Printf("ipfool version %s, using iplib %s\n", info.Main.Version, iplibVersion)
+		fmt.Printf("ipfool %s, using iplib %s\n", info.Main.Version, iplibVersion)
 		if versionExtendedFlag {
 			viewExtendedVersion(info)
 		}
