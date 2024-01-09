@@ -21,7 +21,7 @@ Examples:
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		ip := retrieveIPAddress(args[0], 6)
+		ip := retrieveIPAddress(args[0], v6)
 		fmt.Println(iplib.IP6ToARPA(ip))
 	},
 }

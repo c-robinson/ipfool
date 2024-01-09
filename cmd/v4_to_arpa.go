@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var v46ToARPACmd = &cobra.Command{
+var v4ToARPACmd = &cobra.Command{
 	Use:   "arpa <address>",
 	Short: "IPv4 address to DNS ARPA-domain PTR",
 	Long: `
@@ -22,14 +22,10 @@ Examples:
 	Args:                  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		ip := retrieveIPAddress(args[0], v4)
-		fmt.Println(iplib.IPToARPA(ip))
+		fmt.Println(iplib.IP4ToARPA(ip))
 	},
 }
 
 func init() {
-	var v4ToARPACmd = *v46ToARPACmd
-	v4ToCmd.AddCommand(&v4ToARPACmd)
-
-	var v6ToARPACmd = *v46ToARPACmd
-	v6ToCmd.AddCommand(&v6ToARPACmd)
+	v4ToCmd.AddCommand(v4ToARPACmd)
 }
