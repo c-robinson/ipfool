@@ -103,15 +103,19 @@ func netViewIPv4Address(ipnet iplib.Net4) {
 }
 
 func netViewIPv6Address(ipnet iplib.Net6) {
+	size, _ := ipnet.Hostmask.Size()
 	data := map[string]string{
-		"Address": ipnet.IP().String(),
-		"Netmask": putSeperatorsAroundIPv6Netmask(ipnet.Mask().String()),
-		"First":   iplib.ExpandIP6(ipnet.FirstAddress()),
-		"Last":    iplib.ExpandIP6(ipnet.LastAddress()),
-		"Count":   fmt.Sprintf("%s", ipnet.Count().String()),
+		"Address":  ipnet.IP().String(),
+		"Netmask":  putSeperatorsAroundIPv6Netmask(ipnet.Mask().String()),
+		"First":    iplib.ExpandIP6(ipnet.FirstAddress()),
+		"Last":     iplib.ExpandIP6(ipnet.LastAddress()),
+		"Hostmask": putSeperatorsAroundIPv6Netmask(ipnet.Hostmask.String()),
+		"Count":    fmt.Sprintf("%s", ipnet.Count().String()),
 	}
-
-	for _, k := range []string{"Address", "Netmask", "First", "Last", "Count"} {
+	for _, k := range []string{"Address", "Netmask", "Hostmask", "First", "Last", "Count"} {
+		if k == "Hostmask" && size == 0 {
+			continue
+		}
 		fmt.Printf("%-18s %-16s\n", k, data[k])
 	}
 	rfclist := iana.GetRFCsForNetwork(ipnet)
