@@ -16,7 +16,7 @@ var netViewCmd = &cobra.Command{
 	Long: `
 The 'net view' subcommand takes a subnet as input and prints some handy-dandy
 info about it, like the network's first and last usable address, the number of
-addresses it contains and whether all or part of the network overlap with an
+addresses it contains and whether all or part of the network overlaps with an
 IANA reservation.
 
 Note that the count that is returned is the number of *usable* addresses in
@@ -30,9 +30,9 @@ On top of reporting data about the network, the 'view' subcommand also reports
 RFC's governing any "special use" purposes of a given netblock as well as the
 status of three boolean designations: "forwardable", "private" and "reserved".
 These are copied straight from the relevant IANA registries and their
-translations are:
+definitions are:
 
-	Forwardable: A boolean value indicating whether a router may
+    Forwardable: A boolean value indicating whether a router may
       forward an IP datagram whose destination address is drawn from the
       allocated special-purpose address block between external
       interfaces.
