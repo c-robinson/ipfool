@@ -13,32 +13,28 @@ experimenting with subnets and supernets. The most generally useful
 subcommand might be 'net view' which displays information about the
 provided netblock. Note that most commands under this subtree can be
 told to report their results in the view format by using the --view
-flag. For example:
+flag. 
 
-  % ipfool net nextnet --view 192.168.0.0/24
-  Original           192.168.0.0/24
-  Address            192.168.0.0
-  Netmask            255.255.255.0
-  Network            192.168.0.0
-  First              192.168.0.1
-  Last               192.168.0.254
-  Wildcard           000000ff
-  Broadcast          192.168.0.255
-  Count              254
-  Registered in: RFC1918
-  Network may be forwarded, is private, is not reserved
+For IPv6 addresses ipfool supports the notion of a "hostmask", which
+is described in more detail via 'ipfool help hostmask'. This option is
+transparent, meaning that if you don't invoke the command with a
+hostmask you won't get any information about it. The brief explanation
+is that a hostmask masks bits from the right side of an address in the
+same way that netmask does from the left and can be used to constrain
+the following commands within the 'net' subtree: 'count', increment',
+'decrement' and 'enumerate'. Hostmasks are specified by appending the mask
+size to the address with a ':', for example '2001:db8::/56:64' defines
+a network with a 56bit netmask and a 64bit hostmask:
 
-  Next adjacent      192.168.1.0/24
-  Address            192.168.1.0
-  Netmask            255.255.255.0
-  Network            192.168.1.0
-  First              192.168.1.1
-  Last               192.168.1.254
-  Wildcard           000000ff
-  Broadcast          192.168.1.255
-  Count              254
-  Registered in: RFC1918
-  Network may be forwarded, is private, is not reserved
+  % ipfool net view 2001:db8::/56:64
+  Address            2001:db8::
+  Netmask            ffff:ffff:ffff:ff00:0000:0000:0000:0000
+  Hostmask           0000:0000:0000:0000:ffff:ffff:ffff:ffff
+  First              2001:0db8:0000:0000:0000:0000:0000:0000
+  Last               2001:0db8:0000:00ff:0000:0000:0000:0000
+  Count              256
+  Registered in: RFC3849
+  Network may not be forwarded, is private, is not reserved
 `,
 }
 
