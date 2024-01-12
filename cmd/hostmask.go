@@ -15,8 +15,11 @@ IPv6 Interface Identifiers as described in RFC4291, RFC4941 or RFC7217 in
 which the final 64bits of the address are used to construct a unique host
 identifier and the allocator only has control of the first 64bits. So the
 next IP from 2001:db8:1234:5678:: would be 2001:db8:1234:5679 instead of 
-2001:db8:1234:5678::1. Here is a sample view of an IPv6 netblock without
-a hostmask:
+2001:db8:1234:5678::1. To use a hostmask, append the mask size after the
+CIDR value with a ':', for example '2001:db8::/56:60' defines a network with
+a 56bit netmask and a 60bit hostmask.
+
+Here is a sample view of an IPv6 netblock without a hostmask:
 
     % ipfool net view 2001:db8::/56    
     Address            2001:db8::      
@@ -28,7 +31,7 @@ a hostmask:
     Network may not be forwarded, is private, is not reserved
 
 This creates a block with 4.7 sextillion usable addresses. Below is he same
-block with a hostmask of 60, created by appending ':60' after the netmask.
+block with a hostmask of 60, created as described above by appending ':60'.
 The mask is applied from the rightmost byte, leaving 12 unmasked bits for a
 total of 4096 allocatable addresses:
 
@@ -61,6 +64,13 @@ incrementing/decrementing makes sense to the end user, as shown here:
 
 A hostmask of /1 will block out the left-most bit of the 16th byte
 while a /8 will block the entire 16th byte.
+
+To reiterate: I am pretty sure this is my own construction, at least I've
+never seen a formal proposal for it. As a result I've taken great pains to
+make sure you don't ever have to use it. It might be a very dumb idea I am
+having and I wouldn't want to inflict it on this tool that I think is
+otherwise quite useful. If you never use the :<hostmask> syntax you never
+even have to know the feature exists.
 `,
 }
 

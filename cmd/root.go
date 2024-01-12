@@ -36,10 +36,16 @@ The 'net view' subcommand is probably the most generally interesting as it
 provides a summary of the subnet (size, first and last address, etc). Other
 commands provide tools for calculating the previous or next neighbor of a
 block, super- or sub-netting the block to a given mask length, generating
-random addresses for a block or enumerating part or all of it.
+random addresses for a block, enumerating part or all of it, and for
+incrementing and decrementing within the netblock.
+
+For v6 addresses within the net subtree, this tool introduces the concept
+of a "hostmask", which is an optional secondary mask that can be applied to
+a netblock to constrain it's host bits. The mask is optional and more info
+can be found via 'ipfool help hostmask'.
 
 Further help can be found for each subcommand via:
-	ipfool <subcommand> --help
+  % ipfool <subcommand> --help
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		_ = cmd.Usage()
