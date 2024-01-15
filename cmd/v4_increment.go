@@ -16,8 +16,10 @@ var v4IncrementCmd = &cobra.Command{
 	Short: "increment an IPv4 address by a given amount (default 1)",
 	Long: `
 The 'v4 increment' command takes an IPv4 address as input. If no arguments
-are given it will increment the address by one. the --by flag can be used to
-specify an increment count larger than 1 (or 1, or 0 frankly).
+are given it will increment the address by one.
+
+Flags:
+  --by <int>  increment by this amount (default 1)
 
 Examples:
   % ipfool v4 increment 192.168.2.0

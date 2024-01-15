@@ -17,13 +17,10 @@ var netContainsCmd = &cobra.Command{
 	Long: `
 The 'net contains' subcommand takes two arguments: a network and either a
 second network or an IP address. It returns true if the second argument is
-wholly or partially contained within the first. 
+wholly or partially contained within the first.
 
-If the --code flag is provided then output is returned as an exit code (0 for
-true, 1 for false). This is a little problematic since a non-zero exit code
-is overloaded for "doesn't contain" as well as input errors but technically
-the word "pickle" is not contained within the 2001:db8::/64 address space so
-it kind of works out.
+Flags:
+  --code return an exit code instead of a boolean value
 
 Examples:
   % ipfool net contains 10.0.0.0/8 192.168.255.8

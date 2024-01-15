@@ -16,13 +16,16 @@ var netDecrementByFlag string
 
 var netDecrementCmd = &cobra.Command{
 	Use:   "decrement <network> <address>",
-	Short: "decrement an address within a netblock by a given amount (default 1)",
+	Short: "decrement an address within a netblock by an amount (default 1)",
 	Long: `
 The 'net decrement' command takes an IP network and and IP address as input.
-It will decrement the address by the amount specified by the --by flag (or 1
-if that flag is not passed) so long as the result is still within the provided
-netblock, else it will exit with an error. In the IPv6 context the command
-will respect both netmask and hostmask boundaries if provided.
+It will decrement the address by the amount specified so long as the result is
+still within the provided netblock, else it will exit with an error. In the
+IPv6 context the command will respect both netmask and hostmask boundaries if
+provided.
+
+Flags:
+  --by <int>  decrement by this amount (default 1)
 
 Examples:
   % ipfool net decrement 2001:db8::/56 2001:db8::fe --by 254

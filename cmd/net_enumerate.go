@@ -18,9 +18,9 @@ The 'net enumerate' subcommand explicitly prints out all of the addresses in
 a given subnet, one per line. This may take an astonishingly long time in the
 IPv6 case.
 
-The --offset flag can be used to start the enumeration at a distance from the
-start address, and the --count flag can be used to limit the number of IPs
-returned.
+Flags:
+ --count <int>    limit the number of IPs returned
+ --offset <int>   start enumeration at this offset from the start address
 
 Examples:
   % ipfool.go net enumerate --offset 15 --count 4 192.168.0.0/16

@@ -14,8 +14,10 @@ includes:
  * expanding IPv6 addresses so all leading zeroes are present
  * calculating the distance between two IPv6 addresses
  * incrementing or decrementing an IPv6 address
+ * generating IID addresses from a prefix and MAC address (and optionally
+   a secret key)
 
-To work with IPv4 networks, use the 'net' subtree.
+To work with IPv6 networks, use the 'net' subtree.
 `,
 	DisableFlagsInUseLine: true,
 }

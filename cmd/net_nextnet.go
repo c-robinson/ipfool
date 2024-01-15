@@ -16,8 +16,11 @@ var netNextCmd = &cobra.Command{
 	Short: "get the next netblock at the given mask",
 	Long: `
 The 'net nextnet' subcommand takes a subnet as input and, by default, returns
-the next subnet at the same make length. The --cidr flag can be used to request
-the next net at a different mask.
+the next subnet at the same make length.
+
+Flags:
+  --cidr <int>  next netblock at this mask length (default: same as input)
+  --view        get expanded view of results
 
 Examples:
   % ipfool net nextnet 192.168.0.0/24

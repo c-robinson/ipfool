@@ -16,8 +16,10 @@ var v6IncrementCmd = &cobra.Command{
 	Short: "increment an IPv6 address by a given amount (default 1)",
 	Long: `
 The 'v6 increment' command takes an IPv6 address as input. If no arguments
-are given it will increment the address by one. the --by flag can be used to
-specify an increment count larger than 1 (or 1, or 0 frankly).
+are given it will increment the address by one.
+
+Flags:
+  --by <int>  increment by this amount (default 1)
 
 Examples:
   % ipfool v6 increment 2001:db8::

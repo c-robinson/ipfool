@@ -2,9 +2,9 @@ package cmd
 
 import "github.com/spf13/cobra"
 
-var hostmaskCmd = &cobra.Command{
+var hostmaskDoc = &cobra.Command{
 	Use:   "hostmask",
-	Short: "documentation about IPv6 hostmasks",
+	Short: "notes on IPv6 hostmasks",
 	Long: `
 HostMask is a mask that can be applied to IPv6 addresses to mask out bits
 from the right side of the address instead of the left (which is the
@@ -75,6 +75,7 @@ even have to know the feature exists.
 }
 
 func init() {
-	netRootCmd.AddCommand(hostmaskCmd)
-	rootCmd.AddCommand(hostmaskCmd)
+	// order matters here and the rootCmd should be last
+	netRootCmd.AddCommand(hostmaskDoc)
+	rootCmd.AddCommand(hostmaskDoc)
 }

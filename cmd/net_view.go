@@ -26,40 +26,16 @@ the first and last addresses are reserved for network and broadcast. The lone
 exception is a /31, which has only two addresses and is only used in the wild
 for numbering point-to-point links a la RFC 3021.
 
-On top of reporting data about the network, the 'view' subcommand also reports
-RFC's governing any "special use" purposes of a given netblock as well as the
-status of three boolean designations: "forwardable", "private" and "reserved".
-These are copied straight from the relevant IANA registries and their
-definitions are:
+For information about the IANA registries see 'ipfool help iana'.
 
-    Forwardable: A boolean value indicating whether a router may
-      forward an IP datagram whose destination address is drawn from the
-      allocated special-purpose address block between external
-      interfaces.
+For information about the forwarding, private and reserved attributes, see
+'ipfool help attributes'.
 
-    Private (aka "Globally Reachable"): A boolean value indicating
-      whether an IP datagram whose destination address is drawn from the
-      allocated special-purpose address block is forwardable beyond a
-      specified administrative domain.
-
-    Reserved(-by-Protocol): A boolean value indicating whether the
-      special-purpose address block is reserved by IP, itself.  This
-      value is "TRUE" if the RFC that created the special-purpose
-      address block requires all compliant IP implementations to behave
-      in a special way when processing packets either to or from
-      addresses contained by the address block.
-
-The kinds of RFCs reported are those that constrain a portion of the address
-space. The most well-known examples being RFC 1918 for the private IPv4 space
-and RFC 3849 for the IPv6 documentation space.
-
-As for the scope of these designations (and the RFCs that may also be listed),
-the rule is that 'view' reports "greedily" meaning that if any part of the
-address block is named in an RFC (or has a boolean value of true for any of
-the three special designations) then the entire block is reported as such. So
-'net view ::/0' will report the entire IPv6 space, every relevant RFC and the
-most restrictive designation values. If you squint it kind of makes the most
-sense that way. I think.
+As for scope the rule is that 'view' reports "greedily" meaning that if any
+part of the address block is named in an RFC (or has a boolean value of true
+for any of the three special designations) then the entire block is reported
+as such. So 'net view ::/0' will report the entire IPv6 space, every relevant
+RFC and the most restrictive designation values.
 `,
 	DisableFlagsInUseLine: true,
 	Args:                  cobra.ExactArgs(1),

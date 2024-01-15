@@ -16,10 +16,13 @@ var netPrevCmd = &cobra.Command{
 	Short: "get the previous netblock at the given mask",
 	Long: `
 The 'net prevnet' subcommand takes a subnet as input and, by default, returns
-the adjacent subnet preceding it, with the same mask length. The --cidr flag
-can be used to generate the subnet at a different mask length but if the
-supplied mask is larger than the original one it is very likely that the new
-subnet will wind up being the supernet of the input subnet.
+the adjacent subnet preceding it, with the same mask length. If the --cidr flag
+is supplied with a larger mask than the original one it is very likely that
+the new subnet will wind up being the supernet of the input subnet.
+
+Flags:
+  --cidr <int>  next netblock at this mask length (default: same as input)
+  --view        get expanded view of results
 
 Examples:
   % ipfool net prevnet 192.168.1.0/24

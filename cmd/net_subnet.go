@@ -16,9 +16,12 @@ var netSubnetCmd = &cobra.Command{
 	Short: "divide a netblock into subnets",
 	Long: `
 The 'net subnet' subcommand takes a subnet as input and, by default, splits
-the subnet in half. The --cidr flag can be supplied to divide it differently.
-It is an error to supply a mask larger than the input mask (for which see the
-supernet subcommand).
+the subnet in half. It is an error to supply a mask larger than the input
+mask (for which see the supernet subcommand).
+
+Flags:
+  --cidr <int>  next netblock at this mask length (default: same as input)
+  --view        get expanded view of results
 
 Examples:
   % ipfool net subnet 192.168.0.0/16

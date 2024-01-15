@@ -15,12 +15,7 @@ var v6CompareCmd = &cobra.Command{
 	Short: "compare two IPv6 addresses",
 	Long: `
 The 'v6 compare' subcommand takes two IPv6 addresses as input and returns
-whether the first is less than, equal to, or greater than the second. This
-probably seems too obvious to turn into a command, but it honestly helped
-me debug a problem with 'net between' on v6 networks and it would have been
-more work to remove it than to leave it in. Maybe one day you'll find it
-useful too! If so please send me an email so I can feel good about this
-decision.
+whether the first is less than, equal to, or greater than the second.
 
 Examples:
   % ipfool v6 compare 2001:db8::1 2001:db8::ffff

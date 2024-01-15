@@ -18,6 +18,9 @@ The 'net between' subcommand takes two IP addresses as arguments and returns
 a list of the netblocks required to span them, inclusive of the first address
 and exclusive of the last.
 
+Flags:
+  --view  get expanded view of results
+
 Examples:
   % ipfool net between 10.0.0.0 15.1.0.1
   10.0.0.0/7

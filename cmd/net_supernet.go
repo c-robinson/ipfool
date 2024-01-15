@@ -17,9 +17,12 @@ var netSupernetCmd = &cobra.Command{
 	Long: `
 The 'net supernet' subcommand takes a subnet as input and, by default, returns
 that subnet's immediate parent (the subnet with a slightly greater netmask).
-The --cidr flag can be used to request the supernet at a given mask, though it
-is an error for the input mask to be smaller than the original (for which see
-the subnet subcommand).
+It is an error for the input mask to be smaller than the original (for which
+see the subnet subcommand).
+
+Flags:
+  --cidr <int>  next netblock at this mask length (default: same as input)
+  --view        get expanded view of results
 
 Examples:
   % ipfool net supernet 192.168.1.0/17
