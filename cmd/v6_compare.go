@@ -14,8 +14,10 @@ var v6CompareCmd = &cobra.Command{
 	Use:   "compare <address1> <address2>",
 	Short: "compare two IPv6 addresses",
 	Long: `
-The 'v6 compare' subcommand takes two IPv6 addresses as input and returns
-whether the first is less than, equal to, or greater than the second.
+'v6 compare' tests two addresses for equality.
+
+Flags:
+  -l, --long   display addresses in result
 
 Examples:
   % ipfool v6 compare 2001:db8::1 2001:db8::ffff

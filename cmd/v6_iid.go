@@ -22,10 +22,11 @@ var v6MakeIIDCmd = &cobra.Command{
 	Use:   "make-iid <address> <mac>",
 	Short: "Generate IPv6 EUI64 Interface Identifier",
 	Long: `
-The 'v6 make-iid' subcommand without flags generates an EUI64-style IPv6 IID
-scoped for local-subnet use ONLY. With flags it will generate an RFC 7217-
-compliant "semantically opaque" IID. For more information on IID's and the
-flags below, see 'ipfool help iid'.
+'v6 make-iid' without flags generates an EUI64-style IPv6 IID. There are
+significant security concerns with these addresses, and the flags below can be
+used to instead generate an RFC 7217-compliant "semantically opaque" IID. 
+
+For more information on IID's and the flags below see 'ipfool help about-iid'.
 
 Flags:
   --secret <secret>  REQUIRED. A secret key, preferably from a secure source

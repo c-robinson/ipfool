@@ -11,8 +11,7 @@ var v4DeltaCmd = &cobra.Command{
 	Use:   "delta <address1> <address2>",
 	Short: "find the distance between two IPv4 addresses",
 	Long: `
-The 'v4 delta' subcommand takes two IPv4 addresses as input and returns an
-integer of the difference between them.
+'v4 delta' returns the numerical difference between two supplied addresses.
 
 Examples:
   % ipfool v4 delta 192.168.1.1 192.168.255.1

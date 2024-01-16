@@ -16,8 +16,11 @@ var ianaViewCmd = &cobra.Command{
 	Short: "view special registry RFCs",
 	Long: `
 With no arguments, the 'iana rfc' subcommand returns the list of all RFCs in
-the IPv4 and IPv6 special purpose registries. The '--v4' or '--v6' arguments
-can be supplied to limit the response to only RFCs relevant to that protocol.
+the IPv4 and IPv6 special purpose registries.
+
+Flags: 
+  --v4   only show IPv4 RFCs
+  --v6   only show IPv6 RFCs
 `,
 	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {

@@ -11,8 +11,8 @@ var v6FromArpaCmd = &cobra.Command{
 	Use:   "arpa <ip6.arpa PTR record>",
 	Short: "IPv6 address from DNS ARPA-domain PTR",
 	Long: `
-The 'v6 from arpa' subcommand converts an address in ip6.arpa format to a
-regular-old IPv6 address.
+'v6 from arpa' converts an address in ip6.arpa format to a regular-old IPv6
+address.
 
 Examples:
   % ipfool v6 from arpa 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa

@@ -11,8 +11,7 @@ var netRandomIPCmd = &cobra.Command{
 	Use:   "random <network>",
 	Short: "return a random IP from the given netblock",
 	Long: `
-The 'net random' subcommand selects a random IP address from the given v4
-or v6 subnet.
+'net random' selects a random IP address from the given v4 or v6 subnet.
 
 Examples:
   % ipfool net random 192.168.0.0/16

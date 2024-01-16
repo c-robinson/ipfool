@@ -18,10 +18,9 @@ var netIncrementCmd = &cobra.Command{
 	Use:   "increment <network> <address>",
 	Short: "increment an address within a netblock by an amount (default 1)",
 	Long: `
-The 'net increment' command takes an IP network and and IP address as input.
-It will increment the address by the amount specified so long as the result is
-still within the provided netblock, else it will exit with an error. In the
-IPv6 context the command will respect both netmask and hostmask boundaries if
+'net increment' increments the provided IP so long as the result is still
+within the provided netblock, or it exits with an error code 2. In the IPv6
+context the command will respect both netmask and hostmask boundaries if
 provided.
 
 Flags:
@@ -46,7 +45,7 @@ Examples:
 
 		if !ipnet.Contains(ip) {
 			fmt.Printf("'%s' is not contained within '%s'\n", ip, ipnet)
-			os.Exit(1)
+			os.Exit(2)
 		}
 
 		switch ipnet.Version() {
@@ -93,7 +92,7 @@ func netIncrementIP6(ipnet iplib.Net6, ip net.IP) {
 		fmt.Println(xip)
 	} else {
 		fmt.Printf("cannot increment by '%s': result is outside of network\n", z)
-		os.Exit(1)
+		os.Exit(2)
 	}
 }
 

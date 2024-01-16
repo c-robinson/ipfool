@@ -11,8 +11,8 @@ var v6DeltaCmd = &cobra.Command{
 	Use:   "delta <address1> <address2>",
 	Short: "find the distance between two IPv6 addresses",
 	Long: `
-The 'v6 delta' subcommand takes two IPv6 addresses as input and returns an
-integer of the difference between them. 
+'v6 delta' returns the numerical difference between two supplied addresses.
+ 
 
 Examples:
   % ipfool v6 delta 2001:db8:: 2001:db8::100:0     

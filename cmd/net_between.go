@@ -14,9 +14,9 @@ var netBetweenCmd = &cobra.Command{
 	Use:   "between <address> <address>",
 	Short: "create a network between two IP addresses",
 	Long: `
-The 'net between' subcommand takes two IP addresses as arguments and returns
-a list of the netblocks required to span them, inclusive of the first address
-and exclusive of the last.
+'net between' takes two IP addresses as arguments and returns a list of the
+netblocks required to span inclusively even if it must create single-address
+blocks to do so.
 
 Flags:
   --view  get expanded view of results

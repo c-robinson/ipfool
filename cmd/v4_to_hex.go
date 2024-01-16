@@ -11,8 +11,7 @@ var v4ToHexCmd = &cobra.Command{
 	Use:   "hex <address>",
 	Short: "dotted-decimal IPv4 address to hexadecimal",
 	Long: `
-The 'v4 to hex' command prints he hexadecimal representation of a given IPv4
-address.
+'v4 to hex' prints he hexadecimal representation of a given IPv4 address.
 
 Examples:
   % ipfool v4 to hex 192.168.1.1

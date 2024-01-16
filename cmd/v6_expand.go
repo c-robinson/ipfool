@@ -11,9 +11,8 @@ var v6ExpandCmd = &cobra.Command{
 	Use:   "expand <address>",
 	Short: "print full IPv6 address instead of the normal, concise format",
 	Long: `
-The 'v6 expand' subcommand prints an IPv6 address without the shortcuts that
-are often used to condense the address by removing obvious-from-context
-zeroes. 
+'v6 expand' prints an IPv6 address without the shortcuts that are often used
+to condense the address by removing obvious-from-context zeroes. 
 
 Examples:
   % ipfool v6 expand 2001:db8::1 

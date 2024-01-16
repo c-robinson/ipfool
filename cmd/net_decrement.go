@@ -18,9 +18,8 @@ var netDecrementCmd = &cobra.Command{
 	Use:   "decrement <network> <address>",
 	Short: "decrement an address within a netblock by an amount (default 1)",
 	Long: `
-The 'net decrement' command takes an IP network and and IP address as input.
-It will decrement the address by the amount specified so long as the result is
-still within the provided netblock, else it will exit with an error. In the
+'net decrement' decrements the provided IP so long as the result is still
+within the provided netblock, or it exits with an error code 2. In the
 IPv6 context the command will respect both netmask and hostmask boundaries if
 provided.
 
@@ -46,7 +45,7 @@ Examples:
 
 		if !ipnet.Contains(ip) {
 			fmt.Printf("'%s' is not contained within '%s'\n", ip, ipnet)
-			os.Exit(1)
+			os.Exit(2)
 		}
 
 		switch ipnet.Version() {
@@ -74,7 +73,7 @@ func netDecrementIP4(ipnet iplib.Net4, ip net.IP) {
 		fmt.Println(xip)
 	} else {
 		fmt.Printf("cannot decrement by '%d': result is outside of network\n", z)
-		os.Exit(1)
+		os.Exit(2)
 	}
 }
 

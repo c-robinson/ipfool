@@ -25,7 +25,7 @@ func respondToTrueFalseQuestion(result, exitCodeOnly bool) {
 	if result {
 		os.Exit(0)
 	}
-	os.Exit(1)
+	os.Exit(2)
 }
 
 func retrieveIPAddress(s string, t addrType) net.IP {

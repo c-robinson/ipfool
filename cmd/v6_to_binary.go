@@ -12,9 +12,9 @@ var v6ToBinaryCmd = &cobra.Command{
 	Use:   "binary <address>",
 	Short: "IPv6 address to binary",
 	Long: `
-The 'v6 to binary' subcommand prints a given IPv6 address as binary. This
-can be useful for comparing netmask boundaries or as a calming meditative
-exercise if you're kind of weird.
+'v6 to binary' prints a given IPv6 address as binary. This can be useful for
+comparing netmask boundaries or as a calming meditative exercise if you're
+kind of weird.
 
 Examples:
   % ipfool v6 to binary 2001:db8::1

@@ -11,8 +11,8 @@ var v4ToIntCmd = &cobra.Command{
 	Use:   "int <address>",
 	Short: "IPv4 address to 32bit unsigned integer",
 	Long: `
-The 'v4 to int' subcommand converts a given IPv4 address into an integer
-where the first address (0.0.0.0) is indexed to 0.
+'v4 to int' converts a given IPv4 address into an integer where the first 
+address (0.0.0.0) is indexed to 0.
 
 Examples:
   % ipfool v4 to int 192.168.1.1

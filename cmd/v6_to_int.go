@@ -11,16 +11,16 @@ var v6ToIntCmd = &cobra.Command{
 	Use:   "int <address>",
 	Short: "IPv6 address to 128bit unsigned integer",
 	Long: `
-The 'v6 to int' subcommand converts a given IPv6 address into an unsigned
-128bit integer where the first address (::) is indexed to 0. Most of the IP
-math in this library is performed by converting addresses to integers and
-performing arithmatic operations on them in that format.
+'v6 to int' converts a given IPv6 address into an unsigned 128bit integer
+where the first address (::) is indexed to 0. Most of the IP math in this
+library is performed by converting addresses to integers and performing
+arithmatic operations on them in that format.
 
 Examples:
   % ipfool v6 to int ::
   0
 
-  % ipfool v6 to int 
+  % ipfool v6 to int 2001:db8::1
   42540766411282592856903984951653826561
 
   % ipfool v6 to int ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff

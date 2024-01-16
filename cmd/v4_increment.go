@@ -15,8 +15,8 @@ var v4IncrementCmd = &cobra.Command{
 	Use:   "increment <address>",
 	Short: "increment an IPv4 address by a given amount (default 1)",
 	Long: `
-The 'v4 increment' command takes an IPv4 address as input. If no arguments
-are given it will increment the address by one.
+'v4 increment' increments the provided address by the given amount, or 1 if
+no amount is provided.
 
 Flags:
   --by <int>  increment by this amount (default 1)

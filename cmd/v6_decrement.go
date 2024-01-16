@@ -15,8 +15,8 @@ var v6DecrementCmd = &cobra.Command{
 	Use:   "decrement <address>",
 	Short: "decrement an IPv6 address by a given amount (default 1)",
 	Long: `
-The 'v6 decrement' command takes an IPv6 address as input. If no arguments
-are given it will decrement the address by one.
+'v6 decrement' decrements the provided address by the given amount, or 1 if
+no amount is provided.
 
 Flags:
   --by <int>  decrement by this amount (default 1)

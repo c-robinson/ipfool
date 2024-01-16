@@ -12,9 +12,9 @@ var v4ToBinaryCmd = &cobra.Command{
 	Use:   "binary <address>",
 	Short: "IPv4 address to binary",
 	Long: `
-The 'v4 to binary' subcommand prints a given IPv4 address as binary. This can
-be useful for comparing netmask boundaries or as a substitute for counting
-sheep if you're sleepy.
+'v4 to binary' prints a given IPv4 address as binary. This can be useful for
+comparing netmask boundaries or as a substitute for counting sheep if you're
+sleepy.
 
 Examples:
   % ipfool v4 to binary 192.168.1.1

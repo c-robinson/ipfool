@@ -17,35 +17,31 @@ addresses and subnets. It uses a "git style" syntax, grouping functions under
 sub-commands to hopefully make the tool more coherent and easier to navigate.
 
 v4
-This subtree holds commands for converting IPv4 addresses between formats,
-incrementing or decrementing them by a given amount, or calculating the
-delta between two addresses. Conversions include in-addr.arpa, binary,
-hexadecimal and integer representations.
+Convert IPv4 addresses between formats, increment or decrement them by a given
+amount, or calculate the delta between two addresses. Conversions include
+in-addr.arpa, binary, hexadecimal and integer representations.
 
 v6
-This subtree holds commands for converting IPv6 addresses between formats,
-incrementing or decrementing them by a given amount, or calculating the
-delta between two addresses. Conversions include ip6.arpa, binary and
-integer representations, as well as "expanding" the address. Also available
-is the 'iid' subcommand, which generates an RFC 7217-compliant "semantically
-opaque" IPv6 address from bits and bobs you give it.
+Convert IPv6 addresses between formats, increment or decrement them by a given
+amount, or calculate the delta between two addresses. Conversions include
+ip6.arpa, binary and integer representations, as well as "expanding" the
+address. Also available is the 'iid' subcommand, which generates an RFC7217
+compliant "semantically opaque" IPv6 address from bits and bobs you supply.
 
 net
-This subtree holds commands for working with both IPv4 and IPv6 networks.
-The 'net view' subcommand is probably the most generally interesting as it
-provides a summary of the subnet (size, first and last address, etc). Other
-commands provide tools for calculating the previous or next neighbor of a
-block, super- or sub-netting the block to a given mask length, generating
-random addresses for a block, enumerating part or all of it, and for
-incrementing and decrementing within the netblock.
+Work with IPv4 and IPv6 networks. Increment or decrement within a netblock,
+generate a random IP from the netblock or enumerate all or part of it.
+Calculate sub- and supernets as well as adjacent neighbors. View details of
+the netblock.
+
+iana
+Query the Special Purpose Registries by RFC, IP or netblock to find constraints
+such as RFC1918 -> 192.168.0.0/16, or RFC3849 -> 2001:DB8::/32.
 
 For v6 addresses within the net subtree, this tool introduces the concept
 of a "hostmask", which is an optional secondary mask that can be applied to
 a netblock to constrain it's host bits. The mask is optional and more info
 can be found via 'ipfool help hostmask'.
-
-Further help can be found for each subcommand via:
-  % ipfool <subcommand> --help
 `,
 	Run: func(cmd *cobra.Command, args []string) {
 		_ = cmd.Usage()

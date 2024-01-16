@@ -15,9 +15,9 @@ var netContainsCmd = &cobra.Command{
 	Use:   "contains <network> <network|address>",
 	Short: "check if a network encompasses another network or address",
 	Long: `
-The 'net contains' subcommand takes two arguments: a network and either a
-second network or an IP address. It returns true if the second argument is
-wholly or partially contained within the first.
+'net contains' takes two arguments: a network and either a second network or
+an IP address. It returns true if the second argument is wholly or partially
+contained within the first, otherwise it returns false and exits code 2.
 
 Flags:
   --code return an exit code instead of a boolean value

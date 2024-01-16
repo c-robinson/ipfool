@@ -15,10 +15,10 @@ var netSupernetCmd = &cobra.Command{
 	Use:   "supernet <network>",
 	Short: "get the supernet of a given netblock",
 	Long: `
-The 'net supernet' subcommand takes a subnet as input and, by default, returns
-that subnet's immediate parent (the subnet with a slightly greater netmask).
-It is an error for the input mask to be smaller than the original (for which
-see the subnet subcommand).
+'net supernet' takes a subnet as input and, by default, returns that subnet's
+immediate parent (the subnet with a slightly greater netmask). It is an error
+for the input mask to be smaller than the original (for which see 
+'net subnet').
 
 Flags:
   --cidr <int>  next netblock at this mask length (default: same as input)

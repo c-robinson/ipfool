@@ -15,10 +15,10 @@ var netPrevCmd = &cobra.Command{
 	Use:   "prevnet <network>",
 	Short: "get the previous netblock at the given mask",
 	Long: `
-The 'net prevnet' subcommand takes a subnet as input and, by default, returns
-the adjacent subnet preceding it, with the same mask length. If the --cidr flag
-is supplied with a larger mask than the original one it is very likely that
-the new subnet will wind up being the supernet of the input subnet.
+'net prevnet' takes a subnet as input and, by default, returns the adjacent
+subnet preceding it, with the same mask length. If the --cidr flag is supplied
+with a larger mask than the original one it is very likely that the new subnet
+will wind up being the supernet of the input subnet.
 
 Flags:
   --cidr <int>  next netblock at this mask length (default: same as input)

@@ -13,8 +13,8 @@ var v4FromIntCmd = &cobra.Command{
 	Use:   "int <integer value>",
 	Short: "IPv4 address from 32bit unsigned integer",
 	Long: `
-The 'v4 from int' subcommand converts an integer into an IPv4 address, where
-0 is converted to 0.0.0.0 and 4294967295 becomes 255.255.255.255
+'v4 from int' converts an integer into an IPv4 address where 0 == 0.0.0.0
+and 4294967295 == 255.255.255.255
 
 Examples:
   % ipfool v4 from int 3232235777

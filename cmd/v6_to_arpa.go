@@ -11,8 +11,8 @@ var v6ToARPACmd = &cobra.Command{
 	Use:   "arpa <address>",
 	Short: "IPv6 address to DNS ARPA-domain PTR",
 	Long: `
-The 'v6 to arpa' subcommand converts and IPv6 address to an ip6.arpa
-address, suitable for use as a PTR record.
+'v6 to arpa' converts an IPv6 address to an ip6.arpa address, suitable for use
+as a PTR record.
 
 Examples:
   % ipfool v6 to arpa 2001:db8::1

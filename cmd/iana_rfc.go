@@ -15,8 +15,7 @@ var ianaRFCCmd = &cobra.Command{
 	Use:   "rfc <rfc number>",
 	Short: "list networks affected by a specific special registry RFC",
 	Long: `
-The 'iana rfc' subcommand returns the list of all networks affected by the
-given RFC.
+'iana rfc' returns the list of all networks affected by the given RFC.
 
 Examples:
   % ipfool iana rfc 1918

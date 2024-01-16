@@ -12,8 +12,8 @@ var v4Tov6Cmd = &cobra.Command{
 	Use:   "v6 <address>",
 	Short: "IPv4 address to 'v4 mapped IPv6' address",
 	Long: `
-The 'v4 to v6' subcommand converts a given IPv4 address to a 'v4 mapped v6'
-address as defined in RFC 4291 section 2.5.5.2. From the relevant section:
+'v4 to v6' converts a given IPv4 address to a 'v4 mapped v6' address as defined
+in RFC 4291 section 2.5.5.2. From the relevant section:
 
   |                80 bits               | 16 |      32 bits        |
   +--------------------------------------+--------------------------+

@@ -15,8 +15,8 @@ var netNextCmd = &cobra.Command{
 	Use:   "nextnet <network>",
 	Short: "get the next netblock at the given mask",
 	Long: `
-The 'net nextnet' subcommand takes a subnet as input and, by default, returns
-the next subnet at the same make length.
+'net nextnet' takes a subnet as input and, by default, returns the next subnet
+at the same make length.
 
 Flags:
   --cidr <int>  next netblock at this mask length (default: same as input)

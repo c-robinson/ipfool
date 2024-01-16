@@ -13,8 +13,8 @@ var v4FromHexCmd = &cobra.Command{
 	Use:   "hex <hexadecimal value>",
 	Short: "IPv4 address from hexadecimal",
 	Long: `
-The 'v4 from hex' subcommand converts a hexadecimal value to an IPv4 address.
-The traditional '0x' prefix is optional but knock yourself out.
+'v4 from hex' converts a hexadecimal value to an IPv4 address. The traditional
+"0x" prefix is optional but knock yourself out.
 
 Examples:
   % ipfool v4 from hex 0xc0a80101

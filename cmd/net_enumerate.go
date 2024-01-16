@@ -14,9 +14,8 @@ var netEnumerateCmd = &cobra.Command{
 	Use:   "enumerate <network>",
 	Short: "print all IPs in the subnet (caveat emptor)",
 	Long: `
-The 'net enumerate' subcommand explicitly prints out all of the addresses in
-a given subnet, one per line. This may take an astonishingly long time in the
-IPv6 case.
+'net enumerate' explicitly prints out all of the addresses in a given subnet,
+one per line. This may take an astonishingly long time in the IPv6 case.
 
 Flags:
  --count <int>    limit the number of IPs returned

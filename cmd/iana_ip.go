@@ -17,8 +17,8 @@ var ianaIPCmd = &cobra.Command{
 	Use:   "ip <address|network>",
 	Short: "list special registry RFCs that apply to an IP address or network",
 	Long: `
-The 'iana ip' subcommand returns the list of all RFCs that apply to the given
-IP address or network.
+'iana ip'  returns the list of all RFCs that apply to the given IP address or
+network.
 
 Examples:
   % ipfool iana ip 192.168.1.0/24

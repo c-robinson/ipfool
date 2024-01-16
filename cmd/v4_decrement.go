@@ -15,8 +15,8 @@ var v4DecrementCmd = &cobra.Command{
 	Use:   "decrement <address>",
 	Short: "decrement an IPv4 address by a given amount (default 1)",
 	Long: `
-The 'v4 decrement' command takes an IP address as input. If no arguments are
-given it will decrement the address by one.
+'v4 decrement' decrements the provided address by the given amount, or 1 if
+no amount is provided.
 
 Flags:
   --by <int>  decrement by this amount (default 1)

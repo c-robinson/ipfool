@@ -14,8 +14,10 @@ var v4CompareCmd = &cobra.Command{
 	Use:   "compare <address1> <address2>",
 	Short: "compare two IPv4 addresses",
 	Long: `
-The 'v4 compare' subcommand takes two IPv4 addresses as input and returns
-whether the first is less than, equal to, or greater than the second.
+'v4 compare' tests two addresses for equality.
+
+Flags:
+  -l, --long   display addresses in result
 
 Examples:
   % ipfool v4 compare 192.168.1.1 192.168.255.1

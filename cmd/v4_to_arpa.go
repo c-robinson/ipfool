@@ -11,8 +11,8 @@ var v4ToARPACmd = &cobra.Command{
 	Use:   "arpa <address>",
 	Short: "IPv4 address to DNS ARPA-domain PTR",
 	Long: `
-The 'v4 to arpa' command prints the in-addr.arpa entry for a given IPv4
-address, suitable for use as a PTR record.
+'v4 to arpa' prints the in-addr.arpa entry for a given IPv4 address, suitable
+for use as a PTR record.
 
 Examples:
   % ipfool v4 to arpa 192.168.1.1
