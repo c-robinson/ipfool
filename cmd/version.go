@@ -9,6 +9,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var Version = ""
+
 type Stamp struct {
 	InfoGoVersion string
 	InfoCompiler  string
@@ -20,7 +22,7 @@ type Stamp struct {
 
 var versionExtendedFlag bool
 
-var VersionCmd = &cobra.Command{
+var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "print ipfool version",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -35,7 +37,11 @@ var VersionCmd = &cobra.Command{
 			}
 		}
 
-		fmt.Printf("ipfool %s, using iplib %s\n", info.Main.Version, iplibVersion)
+		if len(Version) == 0 {
+			Version = info.Main.Version
+		}
+
+		fmt.Printf("ipfool %s, using iplib %s\n", Version, iplibVersion)
 		if versionExtendedFlag {
 			viewExtendedVersion(info)
 		}
@@ -106,6 +112,6 @@ func viewExtendedVersion(info *debug.BuildInfo) {
 }
 
 func init() {
-	rootCmd.AddCommand(VersionCmd)
-	VersionCmd.Flags().BoolVar(&versionExtendedFlag, "extended", false, "get expanded version information")
+	rootCmd.AddCommand(versionCmd)
+	versionCmd.Flags().BoolVar(&versionExtendedFlag, "extended", false, "get expanded version information")
 }
