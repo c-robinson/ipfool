@@ -67,10 +67,10 @@ Examples:
 			os.Exit(0)
 		}
 		fmt.Printf("%-18s %-36s\n", "Original", ipnet.String())
-		ViewIPAddress(ipnet)
+		viewIPAddress(ipnet)
 
 		fmt.Printf("%-18s %-36s\n", "Supernet", ipnets.String())
-		ViewIPAddress(ipnets)
+		viewIPAddress(ipnets)
 
 	},
 }

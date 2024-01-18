@@ -67,10 +67,10 @@ Examples:
 			}
 
 			fmt.Printf("%-18s %-36s\n", "Original", ipnet.String())
-			ViewIPAddress(ipnet)
+			viewIPAddress(ipnet)
 			for i, ipn := range ipnets {
 				fmt.Printf("%s %-11d %-36s\n", "Subnet", i+1, ipn.String())
-				ViewIPAddress(ipn)
+				viewIPAddress(ipn)
 			}
 
 		case iplib.IP6Version:
@@ -82,10 +82,10 @@ Examples:
 				return
 			}
 
-			ViewIPAddress(ipnet)
+			viewIPAddress(ipnet)
 			for i, ipn := range ipnets {
 				fmt.Printf("%s %-11d %-36s\n", "Subnet", i+1, ipn.String())
-				ViewIPAddress(ipn)
+				viewIPAddress(ipn)
 			}
 
 		}

@@ -62,10 +62,10 @@ Examples:
 		}
 
 		fmt.Printf("%-18s %-36s\n", "Original", ipnet.String())
-		ViewIPAddress(ipnet)
+		viewIPAddress(ipnet)
 
 		fmt.Printf("%-18s %-36s\n", "Next adjacent", ipnets.String())
-		ViewIPAddress(ipnets)
+		viewIPAddress(ipnets)
 	},
 }
 

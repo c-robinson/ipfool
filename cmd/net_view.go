@@ -42,11 +42,11 @@ RFC and the most restrictive designation values.
 	ValidArgs:             []string{"cidr"},
 	Run: func(cmd *cobra.Command, args []string) {
 		ipnet := retrieveIPNetwork(args[0], v46)
-		ViewIPAddress(ipnet)
+		viewIPAddress(ipnet)
 	},
 }
 
-func ViewIPAddress(ipnet iplib.Net) {
+func viewIPAddress(ipnet iplib.Net) {
 	switch ipnet.Version() {
 	case iplib.IP4Version:
 		netViewIPv4Address(ipnet.(iplib.Net4))
