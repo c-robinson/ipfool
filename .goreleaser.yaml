@@ -8,7 +8,6 @@ before:
     - go generate ./...
 
 builds:
-
   - id: ipfool-general
     binary: ipfool
     goos:
@@ -62,7 +61,8 @@ builds:
 
 #Configuration for building packages for rpm and deb package managers
 nfpms:
-  - package_name: ipfool
+  - id: ipfool-general
+    package_name: ipfool
     homepage: https://github.com/c-robinson/ipfool/
     maintainer: Chad Robinson <chadr@zang.com>
     description: |-
