@@ -8,8 +8,6 @@ before:
     - go generate ./...
 
 builds:
-  - env:
-      - CGO_ENABLED=0
 
   - id: ipfool-general
     binary: ipfool
@@ -23,6 +21,8 @@ builds:
       # - 386
       - arm64
       - amd64
+    env:
+      - CGO_ENABLED=0
     ldflags:
       - "-s -w -X main.version={{ .Version }}"
 
@@ -36,6 +36,7 @@ builds:
     goamd64:
       - v1
     env:
+      - CGO_ENABLED=0
       # NOTE: the ${ARCH} envar is created so that the post hook, below, can
       # use it to determine the unique dist path for each binary. The default
       # convention 'dist/${BuildID}_${BuildTarget}' which isn't as straight-

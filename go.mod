@@ -3,7 +3,7 @@ module github.com/c-robinson/ipfool
 go 1.21
 
 require (
-	github.com/c-robinson/iplib/v2 v2.0.3
+	github.com/c-robinson/iplib/v2 v2.0.4
 	github.com/spf13/cobra v1.8.0
 	lukechampine.com/uint128 v1.3.0
 )
