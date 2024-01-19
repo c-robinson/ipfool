@@ -74,7 +74,7 @@ jobs:
           version: latest
           #install-only: true
           # below this line only works because above commented out
-          args: build --id ipfool-darwin
+          args: build --id ipfool-osx
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
