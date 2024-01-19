@@ -4,6 +4,8 @@ import (
 	"github.com/c-robinson/ipfool/cmd"
 )
 
+var Version = ""
+
 func main() {
-	cmd.Execute()
+	cmd.Execute(Version)
 }

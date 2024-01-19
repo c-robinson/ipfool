@@ -37,15 +37,21 @@ var versionCmd = &cobra.Command{
 			}
 		}
 
-		if len(Version) == 0 {
-			Version = info.Main.Version
-		}
-
-		fmt.Printf("ipfool %s, using iplib %s\n", Version, iplibVersion)
+		fmt.Printf("ipfool %s, using iplib %s\n", retrieveAppVersion(info), iplibVersion)
 		if versionExtendedFlag {
 			viewExtendedVersion(info)
 		}
 	},
+}
+
+func retrieveAppVersion(info *debug.BuildInfo) string {
+	if Version != "" {
+		return Version
+	}
+	if info.Main.Version != "" {
+		return info.Main.Version
+	}
+	return "(unknown)"
 }
 
 func retrieveDepends(info *debug.BuildInfo) []string {
@@ -95,6 +101,7 @@ func retrieveStamp(info *debug.BuildInfo) *Stamp {
 			stamp.VCSRevision = setting.Value
 		}
 	}
+
 	return &stamp
 }
 

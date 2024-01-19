@@ -1,32 +1,63 @@
-# This is an example .goreleaser.yml file with some sensible defaults.
-# Make sure to check the documentation at https://goreleaser.com
-
-# The lines below are called `modelines`. See `:help modeline`
-# Feel free to remove those if you don't want/need to use them.
-# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
 
 version: 1
 
 before:
   hooks:
-    # You may remove this if you don't use go modules.
     - go mod tidy
-    # you may remove this if you don't need go generate
     - go generate ./...
 
 builds:
   - env:
       - CGO_ENABLED=0
+
+  - id: ipfool-general
+    binary: ipfool
     goos:
+      - freebsd
       - linux
+      - openbsd
       - windows
-      - darwin
     goarch:
       # omit 386 due to an overflow bug in net6.go (fixed in iplib 2.0.4)
       # - 386
       - arm64
       - amd64
+    ldflags:
+      - "-s -w -X main.version={{ .Version }}"
+
+  - id: ipfool-osx
+    binary: ipfool
+    goos:
+      - darwin
+    goarch:
+      - arm64
+      - amd64
+    goamd64:
+      - v1
+    env:
+      # NOTE: the ${ARCH} envar is created so that the post hook, below, can
+      # use it to determine the unique dist path for each binary. The default
+      # convention 'dist/${BuildID}_${BuildTarget}' which isn't as straight-
+      # forward as it seems. BuildTarget for arm64 is just "arm64" but for
+      # amd64 it is "amd64-<version>", which is a matrix of everything listed
+      # in the "goamd" section above this comment. Currently we only support
+      # v1 but if we change it or add more we will need to adjust this
+      # accordingly
+      - >-
+        {{- if eq .Arch "amd64"}}ARCH=amd64_v1{{- end }}
+        {{- if eq .Arch "arm64"}}ARCH=arm64{{- end }}
+    ldflags:
+      - "-w -X main.version={{ .Version }}"
+    hooks:
+      post: |
+        sh -c '
+        codesign --timestamp \
+          --options=runtime \
+          -s "${APPLE_DEVELOPER_ID}" \
+          -v \
+          dist/ipfool-osx_darwin_${ARCH}/ipfool
+        '
 
 #Configuration for building packages for rpm and deb package managers
 nfpms:

@@ -50,7 +50,8 @@ can be found via 'ipfool help hostmask'.
 
 // Execute runs rootCmd and needs normal printer in case onIntialize fails
 // and no printer is available
-func Execute() {
+func Execute(version string) {
+	Version = version
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Printf("while executing command: %s\n", err)
 		os.Exit(1)

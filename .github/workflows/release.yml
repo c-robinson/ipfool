@@ -1,4 +1,5 @@
 name: Release
+run-name: ${{ inputs.tag_name }}
 
 on:
   release:
@@ -16,19 +17,89 @@ jobs:
     env:
       flags: ""
     steps:
-      - if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
-        run: echo "flags=--snapshot" >> $GITHUB_ENV
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-go@v3
+      - name: Configure Go
+        uses: actions/setup-go@v5
         with:
           go-version: stable
           cache: true
-      - uses: goreleaser/goreleaser-action@v4
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v5
         with:
           distribution: goreleaser
           version: latest
-          args: release --clean ${{ env.flags }}
+          # args: release --clean ${{ env.flags }}
+          args: build --id ipfool-general
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  darwin:
+    runs-on: macos-latest
+    env:
+      flags: ""
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: true
+      - name: Configure darwin keychain
+        env:
+          APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
+          APPLE_APPLICATION_CERT: ${{ secrets.APPLE_APPLICATION_CERT }}
+          APPLE_APPLICATION_CERT_PASSWORD: ${{ secrets.APPLE_APPLICATION_CERT_PASSWORD }}
+        run: |
+          keychain="$RUNNER_TEMP/buildagent.keychain"
+          keychain_password="password1"
+          
+          security create-keychain -p "$keychain_password" "$keychain"
+          security default-keychain -s "$keychain"
+          security unlock-keychain -p "$keychain_password" "$keychain"
+          
+          base64 -D <<<"$APPLE_APPLICATION_CERT" > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -k "$keychain" -P "$APPLE_APPLICATION_CERT_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$keychain_password" "$keychain"
+          rm "$RUNNER_TEMP/cert.p12"
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          distribution: goreleaser
+          version: latest
+          #install-only: true
+          # below this line only works because above commented out
+          args: build --id ipfool-darwin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
+
+      #- name: Build binary
+      #  env:
+      #    APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
+      #  run: script/release --local "$TAG_NAME" --platform macos
+      #- name: Notarize binary
+      #  if: inputs.environment == 'production'
+      #  env:
+      #    APPLE_ID: ${{ vars.APPLE_ID }}
+      #    APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+      #    APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
+      #  run: |
+      #    xcrun notarytool submit ipfool --apple-id "${APPLE_ID?}" --team-id "${APPLE_DEVELOPER_ID?}" --password "${APPLE_ID_PASSWORD?}"
+      #    shopt -s failglob
+      #    script/sign dist/gh_*_macOS_*.zip
+      #
+      #    codesign --timestamp --options=runtime -s "${APPLE_DEVELOPER_ID?}" -v "$1"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: macos
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            dist/*.tar.gz
+            dist/*.zip
