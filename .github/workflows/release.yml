@@ -12,30 +12,9 @@ permissions:
   packages: write
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    env:
-      flags: ""
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Configure Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: stable
-          cache: true
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v5
-        with:
-          distribution: goreleaser
-          version: latest
-          # args: release --clean ${{ env.flags }}
-          args: build --id ipfool-general
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+  # we build on darwin because goreleaser makes it too hard to have separate
+  # package-creation steps for each platform, and we _need_ darwin for code
+  # signing OSX binaries.
   darwin:
     runs-on: macos-latest
     env:
@@ -74,7 +53,8 @@ jobs:
           version: latest
           #install-only: true
           # below this line only works because above commented out
-          args: build --id ipfool-osx
+          #args: build --id ipfool-osx
+          args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
