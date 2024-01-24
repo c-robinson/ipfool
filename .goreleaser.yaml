@@ -16,8 +16,6 @@ builds:
       - openbsd
       - windows
     goarch:
-      # omit 386 due to an overflow bug in net6.go (fixed in iplib 2.0.4)
-      # - 386
       - arm64
       - amd64
     env:
@@ -36,6 +34,10 @@ builds:
       - v1
     env:
       - CGO_ENABLED=0
+      - APPLE_DEVELOPER_ID={{ vars.APPLE_DEVELOPER_ID }}
+      - APPLE_SIGNING_PASSWORD=${{ secrets.APPLE_SIGNING_PASSWORD }}
+      - VERSION={{ .Version }}
+
       # NOTE: the ${ARCH} envar is created so that the post hook, below, can
       # use it to determine the unique dist path for each binary. The default
       # convention 'dist/${BuildID}_${BuildTarget}' which isn't as straight-
@@ -50,14 +52,16 @@ builds:
     ldflags:
       - "-w -X main.version={{ .Version }}"
     hooks:
+      #post: |
+      #  sh -c '
+      #  codesign --timestamp \
+      #    --options=runtime \
+      #    -s "${APPLE_DEVELOPER_ID}" \
+      #    -v \
+      #    dist/ipfool-osx_darwin_${ARCH}/ipfool
+      #  '
       post: |
-        sh -c '
-        codesign --timestamp \
-          --options=runtime \
-          -s "${APPLE_DEVELOPER_ID}" \
-          -v \
-          dist/ipfool-osx_darwin_${ARCH}/ipfool
-        '
+        sh -c build/buildosx.sh
 
 #Configuration for building packages for rpm and deb package managers
 nfpms:
@@ -81,7 +85,6 @@ archives:
       {{- if eq .Arch "amd64" }}x86_64
       {{- else }}{{ .Arch }}{{ end }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
-    # use zip for windows archives
     format_overrides:
       - goos: windows
         format: zip

@@ -51,30 +51,12 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          #install-only: true
-          # below this line only works because above commented out
-          #args: build --id ipfool-osx
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
+          APPLE_SIGNING_PASSWORD: ${{ secrets.APPLE_SIGNING_PASSWORD }}
 
-      #- name: Build binary
-      #  env:
-      #    APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
-      #  run: script/release --local "$TAG_NAME" --platform macos
-      #- name: Notarize binary
-      #  if: inputs.environment == 'production'
-      #  env:
-      #    APPLE_ID: ${{ vars.APPLE_ID }}
-      #    APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-      #    APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
-      #  run: |
-      #    xcrun notarytool submit ipfool --apple-id "${APPLE_ID?}" --team-id "${APPLE_DEVELOPER_ID?}" --password "${APPLE_ID_PASSWORD?}"
-      #    shopt -s failglob
-      #    script/sign dist/gh_*_macOS_*.zip
-      #
-      #    codesign --timestamp --options=runtime -s "${APPLE_DEVELOPER_ID?}" -v "$1"
       - uses: actions/upload-artifact@v3
         with:
           name: macos
