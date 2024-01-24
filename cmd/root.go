@@ -28,6 +28,10 @@ ip6.arpa, binary and integer representations, as well as "expanding" the
 address. Also available is the 'iid' subcommand, which generates an RFC7217
 compliant "semantically opaque" IPv6 address from bits and bobs you supply.
 
+list
+Work on lists of IP addresses. Sort them, prune duplicates, return their
+inverse within a netblock (e.g. find the free addresses).
+
 net
 Work with IPv4 and IPv6 networks. Increment or decrement within a netblock,
 generate a random IP from the netblock or enumerate all or part of it.

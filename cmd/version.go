@@ -120,5 +120,5 @@ func viewExtendedVersion(info *debug.BuildInfo) {
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
-	versionCmd.Flags().BoolVar(&versionExtendedFlag, "extended", false, "get expanded version information")
+	versionCmd.Flags().BoolVarP(&versionExtendedFlag, "extended", "x", false, "get expanded version information")
 }

@@ -77,7 +77,6 @@ Examples:
 
 func init() {
 	netRootCmd.AddCommand(netSupernetCmd)
-	netSupernetCmd.Flags().IntVar(&netSupernetCIDRFlag, "cidr", 0, "new CIDR mask")
-	netSupernetCmd.Flags().BoolVar(&netSupernetViewFlag, "view", false, "get expanded view of subnets")
-
+	netSupernetCmd.Flags().IntVarP(&netSupernetCIDRFlag, "cidr", "m", 0, "new CIDR mask")
+	netSupernetCmd.Flags().BoolVarP(&netSupernetViewFlag, "view", "V", false, "get expanded view of subnets")
 }

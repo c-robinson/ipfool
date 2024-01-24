@@ -76,6 +76,5 @@ Examples:
 
 func init() {
 	ianaRootCmd.AddCommand(ianaIPCmd)
-	ianaIPCmd.Flags().BoolVar(&ianaIPViewFlag, "view", false, "get expanded view of subnets")
-
+	ianaIPCmd.Flags().BoolVarP(&ianaIPViewFlag, "view", "V", false, "get expanded view of subnets")
 }

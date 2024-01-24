@@ -55,5 +55,5 @@ Examples:
 
 func init() {
 	ianaRootCmd.AddCommand(ianaRFCCmd)
-	ianaRFCCmd.Flags().BoolVar(&ianaRFCViewFlag, "view", false, "get expanded view of subnets")
+	ianaRFCCmd.Flags().BoolVarP(&ianaRFCViewFlag, "view", "V", false, "get expanded view of subnets")
 }
