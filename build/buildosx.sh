@@ -1,19 +1,22 @@
 #!/bin/bash
 
-FILE="dist/ipfool-osx_darwin_${ARCH}/ipfool"
-PACKAGE="dist/ipfool_${VERSION}_darwin_${ARCH}.zip"
+FILENAME="ipfool"
+FILEPATH="dist/ipfool-osx_darwin_${ARCH}/${FILENAME}"
+PACKAGE="dist/ipfool_${VERSION}_Darwin_${ARCH}.zip"
 
 echo "Signing ${FILE} with ${APPLE_DEVELOPER_ID}"
 codesign --timestamp \
   --options=runtime \
   -s "${APPLE_DEVELOPER_ID}" \
   -v \
-  "${FILE}"
+  "${FILEPATH}"
 
 # we need to create our own archive, goreleaser locks post-archival hooks
 # away in their paid-tier
 echo "Creating ${PACKAGE}"
-zip "${PACKAGE}" "${FILE}"
+cp ${FILEPATH} .
+zip "${PACKAGE}" "${FILENAME}"
+rm "${FILENAME}"
 
 # This submits a notarization request, the response may take hours so
 # people on OSX might not actually be able to use the new version immediately

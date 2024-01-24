@@ -7,6 +7,7 @@ before:
     - go mod tidy
     - go generate ./...
 
+# generic configuration for all builds that don't need special treatment
 builds:
   - id: ipfool-general
     binary: ipfool
@@ -23,6 +24,7 @@ builds:
     ldflags:
       - "-s -w -X main.version={{ .Version }}"
 
+# macos of course needs special treatment
   - id: ipfool-osx
     binary: ipfool
     goos:
@@ -47,16 +49,8 @@ builds:
         {{- if eq .Arch "amd64"}}ARCH=amd64_v1{{- end }}
         {{- if eq .Arch "arm64"}}ARCH=arm64{{- end }}
     ldflags:
-      - "-w -X main.version={{ .Version }}"
+      - "-s -w -X main.version={{ .Version }}"
     hooks:
-      #post: |
-      #  sh -c '
-      #  codesign --timestamp \
-      #    --options=runtime \
-      #    -s "${APPLE_DEVELOPER_ID}" \
-      #    -v \
-      #    dist/ipfool-osx_darwin_${ARCH}/ipfool
-      #  '
       post: |
         sh -c build/buildosx.sh
 
@@ -85,6 +79,16 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
+
+    allow_different_binary_count: true
+
+checksum:
+  extra_files:
+    - glob: ./dist/ipfool_*_Darwin_*.zip
+
+release:
+  extra_files:
+    - glob: ./dist/ipfool_*_Darwin_*.zip
 
 changelog:
   sort: asc
