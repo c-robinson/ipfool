@@ -34,6 +34,7 @@ jobs:
           APPLE_DEVELOPER_ID: ${{ vars.APPLE_DEVELOPER_ID }}
           APPLE_APPLICATION_CERT: ${{ secrets.APPLE_APPLICATION_CERT }}
           APPLE_APPLICATION_CERT_PASSWORD: ${{ secrets.APPLE_APPLICATION_CERT_PASSWORD }}
+          APPLE_SIGNING_PASSWORD: ${{ secrets.APPLE_SIGNING_PASSWORD }}
         run: |
           keychain="$RUNNER_TEMP/buildagent.keychain"
           keychain_password="password1"
