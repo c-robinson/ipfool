@@ -18,7 +18,7 @@ zip "${PACKAGE}" "${FILE}"
 # This submits a notarization request, the response may take hours so
 # people on OSX might not actually be able to use the new version immediately
 echo "Submitting ${PACKAGE} for notarization"
-xcrun notarytool submit "${PACKAGE}" -v
+xcrun notarytool submit "${PACKAGE}" -v \
   --apple-id "chadr@zang.com" \
   --team-id ${APPLE_DEVELOPER_ID} \
   --password ${APPLE_SIGNING_PASSWORD}
