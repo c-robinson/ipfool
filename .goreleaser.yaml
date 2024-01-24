@@ -34,10 +34,7 @@ builds:
       - v1
     env:
       - CGO_ENABLED=0
-      - APPLE_DEVELOPER_ID={{ vars.APPLE_DEVELOPER_ID }}
-      - APPLE_SIGNING_PASSWORD={{ secrets.APPLE_SIGNING_PASSWORD }}
       - VERSION={{ .Version }}
-
       # NOTE: the ${ARCH} envar is created so that the post hook, below, can
       # use it to determine the unique dist path for each binary. The default
       # convention 'dist/${BuildID}_${BuildTarget}' which isn't as straight-
